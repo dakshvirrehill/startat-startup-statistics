@@ -25,6 +25,7 @@ clear:both;
 padding-bottom:70px;
 }
 .top {
+clear:both;
 padding-top:50px;
 }
 </style>
