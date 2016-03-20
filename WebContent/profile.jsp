@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="model.User" %>
 <%@ page import="model.DBOperations" %>
+<%@ page import="java.util.Vector" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -64,9 +65,11 @@ opacity:0;
 <div class="container-fluid">
 <% String username=(String) session.getAttribute("username");
 	int status=DBOperations.checkStatus(username);
+	User user=new User();
+	user=DBOperations.getUserDetails(username);
 	if(status==0){
 %>
-<form role="form" class="form-horizontal" action="chprodet" method="post">
+<form role="form" class="form-horizontal" action="Chprodet" method="post" enctype="multipart/form-data">
 	<div id="profile-detail-form" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
   <ol class="carousel-indicators">
     <li data-target="#profile-detail-form" data-slide-to="0" class="active"></li>
@@ -112,6 +115,7 @@ opacity:0;
     	<div class="empty"></div>
     	<div class="col-sm-4 col-md-4 col-lg-4"></div>
       	<div class="col-sm-4 col-md-4 col-lg-4">
+      	<input type="text" name="username" value="<%=session.getAttribute("username") %>" hidden>
     		<button type="submit" class="btn btn-primary">Save Changes</button>
     	</div>
     	<div class="col-sm-4 col-md-4 col-lg-4"></div>
@@ -131,11 +135,11 @@ opacity:0;
 <div class="row">
  <div class="col-sm-1 col-md-1 col-lg-1"></div>
  <div class="col-sm-3 col-md-3 col-lg-3">
- 	<img src="<%= %>" class="img-rounded profilepic">
+ 	<img src="<%=user.getProfile_pic_path() %>" class="img-rounded profilepic">
  </div>
  <div class="col-sm-3 col-md-3 col-lg-3">
- 	<h1><%= %></h1><br>
- 	<h3><%= %></h3>
+ 	<h1><%=user.getName() %></h1><br>
+ 	<h3><%=user.getDescription() %></h3>
  </div>
  <div class="col-sm-4 col=md-2 col-lg-2">
  	<% %>
@@ -145,10 +149,10 @@ opacity:0;
 <%
 }
 %>
-<form role="form" class="form-horizontal" action="statusupdate" method="post">
+<form role="form" class="form-horizontal" action="StatusUpdate" method="post">
 	<div class="form-group">
 		<label for="status" class="control-label">Status:</label>
-		<textarea class="form-control" id="status" name=="status" rows="4" placeholder="Whats on your mind?"></textarea>
+		<textarea class="form-control" id="status" name="status" rows="4" placeholder="Whats on your mind?"></textarea>
 	</div>
 	<div class="form-group">
 		<button type="submit" class="btn btn-primary" align="right">Update</button>
