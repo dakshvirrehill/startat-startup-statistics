@@ -1,7 +1,15 @@
 package model;
 
 public class User {
-String username,email,password,mobno,name,profile_pic_path;
+String username,email,password,mobno,name,profile_pic_path,status;
+
+public String getStatus() {
+	return status;
+}
+
+public void setStatus(String status) {
+	this.status = status;
+}
 
 public String getProfile_pic_path() {
 	return profile_pic_path;

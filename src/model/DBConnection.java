@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DBConnection {
 	
@@ -15,7 +16,7 @@ static void Connect()
 		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager.getConnection("jdbc:mysql://loclhost:0336/startat", "TeamStartat", "star123tat");
 	}
-	catch(Exception e)
+	catch(ClassNotFoundException | SQLException e)
 	{
 		e.printStackTrace();
 	}

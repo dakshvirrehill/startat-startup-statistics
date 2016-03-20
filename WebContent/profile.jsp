@@ -62,7 +62,10 @@ opacity:0;
 </nav>
 <div class="empty top"></div>
 <div class="container-fluid">
-<% %>
+<% String username=(String) session.getAttribute("username");
+	int status=DBOperations.checkStatus(username);
+	if(status==0){
+%>
 <form role="form" class="form-horizontal" action="chprodet" method="post">
 	<div id="profile-detail-form" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
   <ol class="carousel-indicators">
@@ -122,6 +125,36 @@ opacity:0;
   </a>
 </div>
 </form>
+<%}
+  else {
+%>
+<div class="row">
+ <div class="col-sm-1 col-md-1 col-lg-1"></div>
+ <div class="col-sm-3 col-md-3 col-lg-3">
+ 	<img src="<%= %>" class="img-rounded profilepic">
+ </div>
+ <div class="col-sm-3 col-md-3 col-lg-3">
+ 	<h1><%= %></h1><br>
+ 	<h3><%= %></h3>
+ </div>
+ <div class="col-sm-4 col=md-2 col-lg-2">
+ 	<% %>
+ </div>
+ <div class="col-sm-1 col-md-1 col-lg-1"></div>
+</div>
+<%
+}
+%>
+<form role="form" class="form-horizontal" action="statusupdate" method="post">
+	<div class="form-group">
+		<label for="status" class="control-label">Status:</label>
+		<textarea class="form-control" id="status" name=="status" rows="4" placeholder="Whats on your mind?"></textarea>
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary" align="right">Update</button>
+	</div>
+</form>
+<% %>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
