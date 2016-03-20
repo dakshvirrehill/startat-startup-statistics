@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="model.User" %>
+<%@ page import="model.DBOperations" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -60,15 +62,17 @@ opacity:0;
 </nav>
 <div class="empty top"></div>
 <div class="container-fluid">
+<% %>
 <form role="form" class="form-horizontal" action="chprodet" method="post">
 	<div id="profile-detail-form" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
   <ol class="carousel-indicators">
     <li data-target="#profile-detail-form" data-slide-to="0" class="active"></li>
     <li data-target="#profile-detail-form" data-slide-to="1"></li>
     <li data-target="#profile-detail-form" data-slide-to="2"></li>
+    <li data-target="#profile-detail-form" data-slide-to="3"></li>
   </ol>
   <div class="carousel-inner">
-    <div class="form-group item active">
+    <div class="item active form-group">
     	<div class="empty"></div>
     	<div class="col-sm-4 col-md-4 col-lg-4"></div>
       	<div class="col-sm-4 col-md-4 col-lg-4">
@@ -78,7 +82,7 @@ opacity:0;
     	<div class="col-sm-4 col-md-4 col-lg-4"></div>
     	<div class="empty"></div>
     </div>
-    <div class="form-group item">
+    <div class="item form-group">
     	<div class="empty"></div>
     	<div class="col-sm-4 col-md-4 col-lg-4"></div>
       	<div class="col-sm-4 col-md-4 col-lg-4">
@@ -88,7 +92,7 @@ opacity:0;
     	<div class="col-sm-4 col-md-4 col-lg-4"></div>
     	<div class="empty"></div>
     </div>
-    <div class="form-group item">
+    <div class="item form-group">
       	<div class="empty"></div>
       	<div class="col-sm-4 col-md-4 col-lg-4"></div>
       	<div class="col-sm-4 col-md-4 col-lg-4">
@@ -101,6 +105,15 @@ opacity:0;
       	<div class="empty"></div>
     </div>
   </div>
+  <div class="item form-group">
+    	<div class="empty"></div>
+    	<div class="col-sm-4 col-md-4 col-lg-4"></div>
+      	<div class="col-sm-4 col-md-4 col-lg-4">
+    		<button type="submit" class="btn btn-primary">Save Changes</button>
+    	</div>
+    	<div class="col-sm-4 col-md-4 col-lg-4"></div>
+    	<div class="empty"></div>
+    </div>
   <a class="left carousel-control" href="#profile-detail-form" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left"></span>
   </a>
