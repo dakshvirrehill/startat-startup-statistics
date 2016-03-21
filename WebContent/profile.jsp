@@ -71,6 +71,7 @@ opacity:0;
 	user=DBOperations.getUserDetails(username);
 	if(status==0){
 %>
+<div class="alert alert-danger">${msg1}</div>
 <form role="form" class="form-horizontal" action="Chprodet" method="post" enctype="multipart/form-data">
 	<div id="profile-detail-form" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
   <ol class="carousel-indicators">
@@ -184,6 +185,7 @@ opacity:0;
 <%
 	}
 %>
+<div class="alert alert-danger">${msg2}</div>
 <form role="form" class="form-horizontal" action="StatusUpdate" method="post">
 	<div class="form-group">
 		<label for="status" class="control-label">Status:</label>
