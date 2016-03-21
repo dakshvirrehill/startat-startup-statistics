@@ -58,4 +58,57 @@ public class DBOperations {
 		}
 		return false;
 	}
+	public static boolean addUserStatus(String username, String status)
+	{
+		String sql="INSERT INTO POST(Username,Post,Type) VALUES('"+username+"','"+status+"','status')";
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			int i=ps.executeUpdate();
+			if(i>0)
+			{
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public static Vector<Post> getAllUserUpdates(String username) {
+		Vector<Post> p=new Vector<Post>();
+		String sql="SELECT * FROM POST WHERE Username='"+username+"'";
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			Post post=new Post();
+			while(rs.next())
+			{
+				post.setUsername(username);
+				post.setPost(rs.getString(2));
+				post.setType(rs.getString(3));
+				p.add(post);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return p;
+	}
+	public static Vector<String> getAllCompanyLogoPath(String username)
+	{
+		Vector<String> logos=new Vector<String>();
+		String sql="SELECT logo_path FROM Company WHERE Username='"+username+"'";
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next())
+			{
+				logos.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return logos;
+	}
 }

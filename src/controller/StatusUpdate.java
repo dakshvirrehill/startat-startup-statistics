@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.DBOperations;
+
 /**
  * Servlet implementation class StatusUpdate
  */
@@ -27,7 +29,18 @@ public class StatusUpdate extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		String status=request.getParameter("status");
+		String username=request.getParameter("username");
+		if(DBOperations.addUserStatus(username, status))
+		{
+			getServletContext().getRequestDispatcher("/profile.jsp").forward(request,response);
+		}
+		else
+		{
+			String message="Couldn't save data due to some error. Kindly retry.";
+			request.setAttribute("msg2", message);
+			getServletContext().getRequestDispatcher("/profile.jsp").include(request, response);
+		}
 	}
 
 }

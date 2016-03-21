@@ -94,7 +94,7 @@ public class Chprodet extends HttpServlet {
 	    else
 	    {
 	    	String message="Couldn't save data due to some error. Kindly retry.";
-	    	request.setAttribute("msg", message);
+	    	request.setAttribute("msg1", message);
 	    	getServletContext().getRequestDispatcher("/profile.jsp").include(request, response);
 	    }
    }catch(Exception e) {

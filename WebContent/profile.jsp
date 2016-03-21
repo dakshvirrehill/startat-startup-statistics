@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="model.User" %>
+<%@ page import="model.Post" %>
 <%@ page import="model.DBOperations" %>
 <%@ page import="java.util.Vector" %>
+<%@ page import="java.util.Iterator" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -141,13 +143,46 @@ opacity:0;
  	<h1><%=user.getName() %></h1><br>
  	<h3><%=user.getDescription() %></h3>
  </div>
- <div class="col-sm-4 col=md-2 col-lg-2">
- 	<% %>
+ <div class="col-sm-4 col=md-4 col-lg-4">
+ 	<%
+ 	Vector<String> logos=DBOperations.getAllCompanyLogoPath(username);
+ 	Iterator i=logos.iterator();
+ 	if(!i.hasNext())
+ 	{
+ 		%>
+<div class="alert alert-info">No Companies added yet.<a href="addcomp.jsp" class="btn btn-primary">Add Now</a></div>
+ 		<%
+ 	}
+ 	else
+ 	{
+ %>
+ <div class="row">
+ <%		int j=1;
+ 		while(i.hasNext())
+ 		{
+ 			String logopath=(String) i.next();
+%>
+<div class="col-sm-2 col=md-2 col-lg-2"><img src="<%=logopath%>" class="img-circle"></div><div class="col-sm-1 col-md-1 col-lg-1"></div>
+<%
+			if(j%4==0)
+			{
+%>
+</div>
+<div class="row">
+<%
+			}
+			j++;
+		}
+ %>
+</div>
+<%
+ 	}
+%>
  </div>
  <div class="col-sm-1 col-md-1 col-lg-1"></div>
 </div>
 <%
-}
+	}
 %>
 <form role="form" class="form-horizontal" action="StatusUpdate" method="post">
 	<div class="form-group">
@@ -155,10 +190,24 @@ opacity:0;
 		<textarea class="form-control" id="status" name="status" rows="4" placeholder="Whats on your mind?"></textarea>
 	</div>
 	<div class="form-group">
+	<input type="text" name="username" value="<%=session.getAttribute("username") %>" hidden>
 		<button type="submit" class="btn btn-primary" align="right">Update</button>
 	</div>
 </form>
-<% %>
+<% 
+Vector<Post> p=DBOperations.getAllUserUpdates(username);
+Iterator i=p.iterator();
+while(i.hasNext())
+{
+	Post post=(Post) i.next();
+%>
+<div class="row empty"></div>
+<div class="row">
+<%=post.getPost() %>
+</div>
+<%
+}
+%>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
