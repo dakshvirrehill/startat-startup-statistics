@@ -33,6 +33,8 @@ public class StatusUpdate extends HttpServlet {
 		String username=request.getParameter("username");
 		if(DBOperations.addUserStatus(username, status))
 		{
+			String message="Status updated";
+			request.setAttribute("msg3", message);
 			getServletContext().getRequestDispatcher("/profile.jsp").forward(request,response);
 		}
 		else

@@ -89,6 +89,8 @@ public class Chprodet extends HttpServlet {
 	    }
 	    if(DBOperations.addUserProfile(username,name,description,profile))
 	    {
+	    	String message="Changes saved successfully";
+	    	request.setAttribute("msg", message);
 	    	getServletContext().getRequestDispatcher("/profile.jsp").forward(request, response);
 	    }
 	    else

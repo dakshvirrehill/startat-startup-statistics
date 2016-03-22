@@ -43,7 +43,7 @@ public class DBOperations {
 		return u;
 	}
 	public static boolean addUserProfile(String username, String name, String description, String Profile_Pic_Path) {
-		String sql="UPDATE User Name='"+name+"', Description='"+description+"', Profile_Pic_Path='"+Profile_Pic_Path+"', Status=1 WHERE Username='"+username+"'";
+		String sql="UPDATE User Name='"+name+"' AND Description='"+description+"' AND Profile_Pic_Path='"+Profile_Pic_Path+"' AND Status=1 WHERE Username='"+username+"'";
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			int i=ps.executeUpdate();
@@ -110,5 +110,40 @@ public class DBOperations {
 			e.printStackTrace();
 		}
 		return logos;
+	}
+	public static boolean updateUserSettings(String username,String password,String email)
+	{
+		String sql="UPDATE User Password='"+password+"' AND Email='"+email+"' WHERE Username='"+username+"'";
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			int i=ps.executeUpdate();
+			if(i>0)
+			{
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public static Page getPage(String slug) {
+		Page page=new Page();
+		String sql="SELECT * FROM Page WHERE Slug='"+slug+"'";
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next())
+			{
+				page.setSlug(slug);
+				page.setTitle(rs.getString(2));
+				page.setContent(rs.getString(3));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return page;
 	}
 }

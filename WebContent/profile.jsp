@@ -55,7 +55,8 @@ opacity:0;
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="profile.jsp">profile</a></li>
+          <li><a href="addcomp.jsp">Add a Company</a>
+          <li><a href="profile.jsp">Profile</a></li>
           <li><a href="settings.jsp">Settings</a></li>
           <li><a href="logout">Logout</a></li> 
         </ul>
@@ -132,6 +133,7 @@ opacity:0;
   </a>
 </div>
 </form>
+<div class="alert alert-success">${msg}</div>
 <%}
   else {
 %>
@@ -196,6 +198,7 @@ opacity:0;
 		<button type="submit" class="btn btn-primary" align="right">Update</button>
 	</div>
 </form>
+<div class="alert alert-success">${msg3}</div>
 <% 
 Vector<Post> p=DBOperations.getAllUserUpdates(username);
 Iterator i=p.iterator();
