@@ -33,6 +33,11 @@ public class Acc_settings extends HttpServlet {
 		String password=request.getParameter("password");
 		String cpassword=request.getParameter("cpassword");
 		String email=request.getParameter("email");
+		if(username.equals("")||password.equals("")||cpassword.equals("")||email.equals("")){
+			String message="Required Fields Empty";
+			request.setAttribute("msg", message);
+			getServletContext().getRequestDispatcher("/settings.jsp").include(request,response);
+		}
 		if(password.equals(cpassword))
 		{	
 			if(DBOperations.updateUserSettings(username, password, email)) {

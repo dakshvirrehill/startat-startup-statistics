@@ -23,7 +23,17 @@ padding-top:50px;
 </style>
 </head>
 <body>
-
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"><img src="images/startat-logo-navbar.png"></a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="page.jsp?name=about">About</a></li>
+      <li><a href="#" id="login">Login/SignUp</a></li>
+    </ul>
+  </div>
+</nav>
   
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>

@@ -31,6 +31,12 @@ public class StatusUpdate extends HttpServlet {
 		// TODO Auto-generated method stub
 		String status=request.getParameter("status");
 		String username=request.getParameter("username");
+		if(status.equals("")||username.equals(""))
+		{
+			String message="Empty Status Field";
+			request.setAttribute("msg2", message);
+			getServletContext().getRequestDispatcher("/profile.jsp").include(request, response);
+		}
 		if(DBOperations.addUserStatus(username, status))
 		{
 			String message="Status updated";

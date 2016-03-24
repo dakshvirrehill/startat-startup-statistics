@@ -67,15 +67,15 @@ String email=u.getEmail();
 	</div>
 	<div class="form-group">
 		<label for="password" class="control-label">Password:</label>
-		<input type="password" class="form-control" id="password" name="password" placeholder="Change Password">
+		<input type="password" class="form-control" id="password" name="password" placeholder="Change Password" required>
 	</div>
 	<div class="form-group">
 		<label for="cpassword" class="control-label">Confirm Password:</label>
-		<input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Change Password">
+		<input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Change Password" required>
 	</div>
 	<div class="form-group">
 		<label for="email" class="control-label">Email:</label>
-		<input type="text" class="form-control" id="email" name="email" value="<%=email %>">
+		<input type="text" class="form-control" id="email" name="email" value="<%=email %>" required>
 	</div>
 	<div class="form-group">
 		<button type="submit" class="btn btn-primary">Save Changes</button>

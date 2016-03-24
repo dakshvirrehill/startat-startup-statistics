@@ -146,4 +146,48 @@ public class DBOperations {
 		
 		return page;
 	}
+	public static boolean addCompany(String username,String name,String company_domain,String email,String website,String stage_of_development,String established,String profile){
+		String sql="INSERT INTO Company(Username,Name,Company_Domain,Email,Website,Stage_of_Development,Established,logo_path) VALUES('"+username+"','"+name+"','"+company_domain+"','"+email+"','"+website+"','"+stage_of_development+"','"+established+"','"+profile+"')";
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			int i=ps.executeUpdate();
+			if(i>0)
+			{
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public static boolean addUser(String username, String email, String password) {
+		String sql="INSERT INTO User(Username,Email,Password) VALUES('"+username+"','"+email+"','"+password+"')";
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			int i=ps.executeUpdate();
+			if(i>0){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public static boolean checkUser(String username,String password) {
+		
+		String sql="SELECT Username FROM User WHERE Username='"+username+"' AND Password='"+password+"'";
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return false;
+	}
 }

@@ -191,7 +191,7 @@ opacity:0;
 <form role="form" class="form-horizontal" action="StatusUpdate" method="post">
 	<div class="form-group">
 		<label for="status" class="control-label">Status:</label>
-		<textarea class="form-control" id="status" name="status" rows="4" placeholder="Whats on your mind?"></textarea>
+		<textarea class="form-control" id="status" name="status" rows="4" placeholder="Whats on your mind?" required></textarea>
 	</div>
 	<div class="form-group">
 	<input type="text" name="username" value="<%=session.getAttribute("username") %>" hidden>

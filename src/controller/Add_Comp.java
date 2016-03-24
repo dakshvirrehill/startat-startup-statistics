@@ -19,43 +19,45 @@ import org.apache.commons.io.output.*;
 
 import model.DBOperations;
 /**
- * Servlet implementation class Chprodet
+ * Servlet implementation class Add_Comp
  */
-@WebServlet("/Chprodet")
-public class Chprodet extends HttpServlet {
+@WebServlet("/Add_Comp")
+public class Add_Comp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private boolean isMultipart;
 	private String filePath;
 	private int maxFileSize = 50 * 1024;
 	private int maxMemSize = 4 * 1024;
-	private File file ;   
+	private File file ;      
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Chprodet() {
+    public Add_Comp() {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
     public void init( ){
         // Get the file location where it would be stored.
         filePath = getServletContext().getInitParameter("file-upload"); 
      }
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name=request.getParameter("name");
-		String description=request.getParameter("description");
+		String company_domain=request.getParameter("company_domain");
+		String email=request.getParameter("email");
+		String website=request.getParameter("website");
+		String stage_of_development=request.getParameter("stage_of_development");
+		String established=request.getParameter("established");
 		String username=request.getParameter("username");
-		if(username.equals("")||name.equals("")||description.equals(""))
-		{
+		if(username.equals("")||company_domain.equals("default")||email.equals("")||stage_of_development.equals("default")||established.equals("")){
 			String message="Required Fields Empty";
-			request.setAttribute("msg1", message);
-			getServletContext().getRequestDispatcher("/profile.jsp").include(request, response);
+			request.setAttribute("msg", message);
+			getServletContext().getRequestDispatcher("/addcomp.jsp").include(request, response);
 		}
-	    String profile="useruploads/";
+		String profile="useruploads/";
 		isMultipart = ServletFileUpload.isMultipartContent(request);
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 	    // maximum size that will be stored in memory
@@ -85,25 +87,25 @@ public class Chprodet extends HttpServlet {
 	          // Write the file
 	          if( fileName.lastIndexOf("\\") >= 0 ){
 	        	  profile=profile+username+fileName.substring(fileName.lastIndexOf('\\'));
-	             file =new File( filePath +username+"_"+fileName.substring(fileName.lastIndexOf("\\"))) ;
+	             file =new File( filePath +username+"_"+name+fileName.substring(fileName.lastIndexOf("\\"))) ;
 	          }else{
 	        	  profile=profile+username+fileName.substring(fileName.lastIndexOf('\\')+1);
-	             file =new File( filePath +username+"_"+fileName.substring(fileName.lastIndexOf("\\")+1)) ;
+	             file =new File( filePath +username+"_"+name+fileName.substring(fileName.lastIndexOf("\\")+1)) ;
 	          }
 	          fi.write( file ) ;
 	       }
 	    }
-	    if(DBOperations.addUserProfile(username,name,description,profile))
+	    if(DBOperations.addCompany(username,name,company_domain,email,website,stage_of_development,established,profile))
 	    {
 	    	String message="Changes saved successfully";
-	    	request.setAttribute("msg", message);
-	    	getServletContext().getRequestDispatcher("/profile.jsp").forward(request, response);
+	    	request.setAttribute("msg1", message);
+	    	getServletContext().getRequestDispatcher("/company.jsp").forward(request, response);
 	    }
 	    else
 	    {
 	    	String message="Couldn't save data due to some error. Kindly retry.";
-	    	request.setAttribute("msg1", message);
-	    	getServletContext().getRequestDispatcher("/profile.jsp").include(request, response);
+	    	request.setAttribute("msg", message);
+	    	getServletContext().getRequestDispatcher("/addcomp.jsp").include(request, response);
 	    }
    }catch(Exception e) {
 	   	e.printStackTrace();
