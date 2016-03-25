@@ -52,10 +52,14 @@ public class Add_Comp extends HttpServlet {
 		String stage_of_development=request.getParameter("stage_of_development");
 		String established=request.getParameter("established");
 		String username=request.getParameter("username");
-		if(username.equals("")||company_domain.equals("default")||email.equals("")||stage_of_development.equals("default")||established.equals("")){
+		String description=request.getParameter("description");
+		if(username.equals("")||company_domain.equals("default")||email.equals("")||stage_of_development.equals("default")||established.equals("")||description.equals("")){
 			String message="Required Fields Empty";
 			request.setAttribute("msg", message);
 			getServletContext().getRequestDispatcher("/addcomp.jsp").include(request, response);
+		}
+		if(name.equals("")) {
+			name="Unnamed";
 		}
 		String profile="useruploads/";
 		isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -95,7 +99,7 @@ public class Add_Comp extends HttpServlet {
 	          fi.write( file ) ;
 	       }
 	    }
-	    if(DBOperations.addCompany(username,name,company_domain,email,website,stage_of_development,established,profile))
+	    if(DBOperations.addCompany(username,name,company_domain,email,website,stage_of_development,established,profile,description))
 	    {
 	    	String message="Changes saved successfully";
 	    	request.setAttribute("msg1", message);

@@ -1,7 +1,23 @@
 package model;
 
 public class Company {
-String logo_path,email,name,field_of_interest,user_id,website,valuation,total_profits,total_expenses,verification,ownership_proof_path;
+String logo_path,email,name,field_of_interest,user_id,website,valuation,total_profits,total_expenses,verification,ownership_proof_path,description;
+public String getDescription() {
+	return description;
+}
+
+public void setDescription(String description) {
+	this.description = description;
+}
+
+int CId;
+public int getCId() {
+	return CId;
+}
+
+public void setCId(int cId) {
+	CId = cId;
+}
 
 public String getLogo_path() {
 	return logo_path;

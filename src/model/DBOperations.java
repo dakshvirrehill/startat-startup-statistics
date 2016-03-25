@@ -146,8 +146,8 @@ public class DBOperations {
 		
 		return page;
 	}
-	public static boolean addCompany(String username,String name,String company_domain,String email,String website,String stage_of_development,String established,String profile){
-		String sql="INSERT INTO Company(Username,Name,Company_Domain,Email,Website,Stage_of_Development,Established,logo_path) VALUES('"+username+"','"+name+"','"+company_domain+"','"+email+"','"+website+"','"+stage_of_development+"','"+established+"','"+profile+"')";
+	public static boolean addCompany(String username,String name,String company_domain,String email,String website,String stage_of_development,String established,String profile,String description){
+		String sql="INSERT INTO Company(Username,Name,Company_Domain,Email,Website,Stage_of_Development,Established,Logo_path,Description) VALUES('"+username+"','"+name+"','"+company_domain+"','"+email+"','"+website+"','"+stage_of_development+"','"+established+"','"+profile+"','"+description+"')";
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			int i=ps.executeUpdate();
@@ -189,5 +189,55 @@ public class DBOperations {
 			e.printStackTrace();
 		}		
 		return false;
+	}
+	public static Vector<Company> getAllCompanyDetails(String username) {
+		Vector<Company> company=new Vector<Company>();
+		String sql="SELECT Name,Company_Domain,Verification,CId FROM Company WHERE Username='"+username+"'";
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			Company c=new Company();
+			while(rs.next())
+			{
+				c.setName(rs.getString(1));
+				c.setCId(rs.getInt(4));
+				c.setField_of_interest(rs.getString(2));
+				c.setVerification(rs.getString(3));
+				company.add(c);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return company;
+	}
+	public static Company getCompanyDetails(int CId) {
+		Company c=new Company();
+		String sql="SELECT * FROM Company WHERE CId="+CId;
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next())
+			{
+				c.setCId(rs.getInt(1));
+				c.setName(rs.getString(2));
+				c.setDescription(rs.getString(3));
+				c.setEmail(rs.getString(4));
+				c.setField_of_interest(rs.getString(5));
+				c.setWebsite(rs.getString(6));
+				c.setLogo_path(rs.getString(7));
+				c.setValuation(rs.getString(8));
+				c.setVerification(rs.getString(9));
+				c.setOwnership_proof_path(rs.getString(10));
+				c.setTotal_profits(rs.getString(11));
+				c.setTotal_expenses(rs.getString(12));
+				c.setUser_id(rs.getString(13));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return c;
 	}
 }

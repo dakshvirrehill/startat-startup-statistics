@@ -71,6 +71,10 @@ opacity:0;
 			<input type="text" class="form-control" id="name" name="name" placeholder="Enter Company Name, Leave blank if not decided">
 		</div>
 		<div class="form-group">
+			<label for="description" class="control-label">Description:</label>
+			<textarea class="form-control" id="description" name="description" placeholder="Enter a description of your company that would be displayed at your company's profile page" rows=4 required></textarea>
+		</div>
+		<div class="form-group">
 			<label for="company_domain" class="control-label">Company Domain:</label>
 			<select id="company_domain" name="company_domain" class="form-control" required>
 				<option value="default">Select your company's domain of operations</option>
