@@ -43,7 +43,7 @@ public class DBOperations {
 		return u;
 	}
 	public static boolean addUserProfile(String username, String name, String description, String Profile_Pic_Path) {
-		String sql="UPDATE User Name='"+name+"' AND Description='"+description+"' AND Profile_Pic_Path='"+Profile_Pic_Path+"' AND Status=1 WHERE Username='"+username+"'";
+		String sql="UPDATE User SET Name='"+name+"' AND Description='"+description+"' AND Profile_Pic_Path='"+Profile_Pic_Path+"' AND Status=1 WHERE Username='"+username+"'";
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			int i=ps.executeUpdate();
@@ -113,7 +113,7 @@ public class DBOperations {
 	}
 	public static boolean updateUserSettings(String username,String password,String email)
 	{
-		String sql="UPDATE User Password='"+password+"' AND Email='"+email+"' WHERE Username='"+username+"'";
+		String sql="UPDATE User SET Password='"+password+"' AND Email='"+email+"' WHERE Username='"+username+"'";
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			int i=ps.executeUpdate();
@@ -239,5 +239,21 @@ public class DBOperations {
 			e.printStackTrace();
 		}
 		return c;
+	}
+	public static boolean getVerified(String CId,String verified_path){
+		int Cid=Integer.parseInt(CId);
+		String sql="UPDATE Company SET Ownership_Proof_Path='"+verified_path+"' AND Verification='yes' WHERE CId="+Cid;
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			int i=ps.executeUpdate();
+			if(i>0)
+			{
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
