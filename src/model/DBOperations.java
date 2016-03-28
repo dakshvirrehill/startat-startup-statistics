@@ -256,4 +256,58 @@ public class DBOperations {
 		}
 		return false;
 	}
+	public static Connections getPossibleConnections(String field_of_interest,String need) {
+		Connections c=new Connections();
+		Vector<Investor> inv=c.getInvestor();
+		Vector<Startup> str=c.getStartup();
+		String sql1="SELECT * FROM Investor WHERE Field_Of_Investment='"+field_of_interest+"'";
+		String sql2="SELECT * FROM Company WHERE Company_Domain='"+need+"'";
+		try {
+			PreparedStatement ps=con.prepareStatement(sql1);
+			ResultSet rs=ps.executeQuery();
+			Investor i=new Investor();
+			while(rs.next()) {
+				i.setName(rs.getString(2));
+				i.setField_of_investment(rs.getString(3));
+				i.setMax_investment(rs.getString(4));
+				i.setEmailid(rs.getString(5));
+				i.setWebsite(rs.getString(6));
+				i.setContact_no(rs.getString(7));
+				inv.add(i);
+			}
+			ps=con.prepareStatement(sql2);
+			rs=ps.executeQuery();
+			Startup s=new Startup();
+			while(rs.next()){
+				s.setName(rs.getString(2));
+				s.setEmailid(rs.getString(4));
+				s.setField_of_interest(rs.getString(5));
+				s.setWebsite(rs.getString(6));
+				s.setNeed(rs.getString(14));
+				str.add(s);
+			}
+			c.setInvestor(inv);
+			c.setStartup(str);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return c;
+	}
+	public static String getNeed(int CId) {
+		String need="unset";
+		String sql="SELECT Need FROM Company WHERE CId="+CId;
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next())
+			{
+				need=rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return need;
+	}
 }
