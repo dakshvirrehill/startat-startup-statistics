@@ -29,6 +29,25 @@ padding:250px;
 padding-left:7px;
 padding-right:5px;
 }    
+input[type=text] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 2px solid red;
+    border-radius: 10px;
+}
+textarea {
+    width: 50%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
 </style>
 <body>
   
@@ -46,11 +65,66 @@ padding-right:5px;
 <div class="container-fluid">
   <div class="col-md-12 ">
     <div class="background">
-       <div class="logo">
-            <center><img src="images/startat-logo-navbar.png"> </center>
-          <p><h1>That's been one of my mantras - focus and simplicity. Simple can be harder than complex: You have to work hard to get your thinking clean to make it simple. But it's worth it in the end because once you get there, you can move mountains.</h1></p>
-          <p><center><b><i><h2>Steve jobs</h2></i></b></center><p>
-       </div>
+       
+        <h1><center><i><b>CONTACT</b></i></center></h1>    
+          <form class="form-horizontal" role="form">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="fname">First Name:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="fname" placeholder="Enter first name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="lname">Last name:</label>
+      <div class="col-sm-10">          
+        <input type="text" class="form-control" id="lname" placeholder="Enter last name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Email:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="email" placeholder="Enter email">
+      </div>
+    </div>
+    <div class="form-group">        
+      <label class="control-label col-sm-2" for="message">Message:</label>
+        <div class="textarea">
+          <textarea></textarea>
+     <br>
+     <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+    </div>     
+        </div>
+      </div>
+    
+    
+  </form>
+<div class="row">
+    <div class="col-sm-4">
+    <ul class="link">
+ <li> <a href="#">link1</a></li>
+ <li> <a href="#">link2</a></li>
+ <li> <a href="#">link3</a></li>
+</ul>
+    </div>
+<div class="col-sm-4">
+    <ul class="link">
+ <li><a href="#">link1</a>
+  <li><a href="#">link2</a></li>
+ <li><a href="#">link3</a></li>
+</ul>
+    </div>
+<div class="col-sm-4">
+    <ul class="link">
+ <li><a href="#">link1</a></li>
+ <li> <a href="#">link2</a></li>
+  <li><a href="#">link3</a></li>
+</ul>
+    
+</div>
+   </div>    
    </div>
  </div>
     </div>
