@@ -35,6 +35,9 @@ background:url("images/Untitled.png");
 background-repeat:no-repeat;
     
 }
+.quote{
+
+}
 </style>
 <body>
   
@@ -116,6 +119,13 @@ background-repeat:no-repeat;
     </div>
   </div>
  </div>
+<div class="quote">
+       <div class="logo">
+            <center><img src="images/startat-logo-navbar.png"> </center>
+          <p><h1>That's been one of my mantras - focus and simplicity. Simple can be harder than complex: You have to work hard to get your thinking clean to make it simple. But it's worth it in the end because once you get there, you can move mountains.</h1></p>
+          <p><center><b><i><h2>Steve jobs</h2></i></b></center></p>
+       </div>
+   </div>
 </div>
 </body>
 </head >
