@@ -25,6 +25,7 @@ clear:both;
 padding-bottom:70px;
 }
 .top {
+clear:both;
 padding-top:50px;
 }
 </style>
@@ -41,6 +42,7 @@ padding-top:50px;
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
+          <li><a href="addcomp.jsp">Add a Company</a>
           <li><a href="profile.jsp">Profile</a></li>
           <li><a href="settings.jsp">Settings</a></li>
           <li><a href="logout">Logout</a></li> 
