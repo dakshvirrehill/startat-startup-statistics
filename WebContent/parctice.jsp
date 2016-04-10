@@ -11,64 +11,125 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <title>front</title>
 <style>
-.wrapper{
-background:url("images/practice.png");
-hieght:1200px;
-width:700px;
-margin=0;
-}
-.wrapper1{
-background:url("images/practice.png");
-hieght:1200px;
-width:700px;
-margin=0;
-}
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
 
-li {
-    float: right;
-}
-
-li a {
-    display: inline-block;
-    color: white;
-    text-align: center;
-    padding: 5px 20px;
-    text-decoration: none;
-}
-
-li a:hover {
-    background-color: #111;
-}
-  
 </style>
 <body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"><img src="images/startat-logo-navbar.png"></a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="page.jsp?name=about">About</a></li>
+      <li><a  href="#signup" data-toggle="modal" data-target=".bs-modal-sm" id="logins">Login/SignUp</a></li>
+    </ul>
+  </div>
+</nav>
+<!-- Modal -->
+<div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+        <br>
+        <div class="bs-example bs-example-tabs">
+            <ul id="myTab" class="nav nav-tabs">
+              <li class="active"><a href="#signin" data-toggle="tab">Log In</a></li>
+              <li class=""><a href="#signup" data-toggle="tab">Sign Up</a></li>
+              <li class=""><a href="#why" data-toggle="tab">Why?</a></li>
+            </ul>
+        </div>
+      <div class="modal-body">
+        <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in" id="why">
+        <p>We need this information so that you can receive access to the site and its content. Rest assured your information will not be sold, traded, or given to anyone.</p>
+        <p></p><br> Please contact <a mailto:href="dakshvirr@gmail.com"></a>dakshvirr@gmail.com</a> for any other inquiries.</p>
+        </div>
+        <div class="tab-pane fade active in" id="signin">
+            <form class="form-horizontal" action="Login" method="post">
+            <fieldset>
+            <!-- Sign In Form -->
+            <!-- Text input-->
+            <div class="control-group">
+              <label class="control-label" for="lusername">Username:</label>
+              <div class="controls">
+                <input required="" id="lusername" name="lusername" type="text" class="form-control" placeholder="Enter your username" class="input-medium" required>
+              </div>
+            </div>
 
-<div class="container-fluid">
-<ul>
-  <li><a href="login.jsp">login/signup</a></li>
-  <li><a href="about.jsp">About</a></li>
-</ul>
-   
-   <div class="wrapper">
-   <img src="images/practice.png" class="img-responsive" alt="Responsive image">
-    
-   <div class=wrapper1">
-   <center><button type="button" class="btn btn-success">sucess</button></center>
-  
-   <img src="images/practice.png" class="img-responsive" alt="Responsive image">
-   
-   </div>
-</div>
+            <!-- Password input-->
+            <div class="control-group">
+              <label class="control-label" for="ppassword">Password:</label>
+              <div class="controls">
+                <input required id="ppassword" name="ppassword" class="form-control" type="password" placeholder="********" class="input-medium">
+              </div>
+            </div>
+
+            <!-- Button -->
+            <div class="control-group">
+              <label class="control-label" for="signin"></label>
+              <div class="controls">
+                <button id="signin" name="signin" class="btn btn-success" type="submit">Sign In</button>
+              </div>
+            </div>
+            </fieldset>
+            </form>
+        </div>
+        <div class="tab-pane fade" id="signup">
+            <form class="form-horizontal" action="Register" method="post">
+            <fieldset>
+            <!-- Sign Up Form -->
+            <!-- Text input-->
+            <div class="control-group">
+              <label class="control-label" for="email">Email:</label>
+              <div class="controls">
+                <input id="email" name="email" class="form-control" type="text" placeholder="Enter a valid email address" class="input-large" required>
+              </div>
+            </div>
+            
+            <!-- Text input-->
+            <div class="control-group">
+              <label class="control-label" for="username">Username:</label>
+              <div class="controls">
+                <input id="username" name="username" class="form-control" type="text" placeholder="Enter your username" class="input-large" required>
+              </div>
+            </div>
+            
+            <!-- Password input-->
+            <div class="control-group">
+              <label class="control-label" for="password">Password:</label>
+              <div class="controls">
+                <input id="password" name="password" class="form-control" type="password" placeholder="********" class="input-large" required>
+                <em>1-8 Characters</em>
+              </div>
+            </div>
+            
+            <!-- Text input-->
+            <div class="control-group">
+              <label class="control-label" for="cpassword">Re-Enter Password:</label>
+              <div class="controls">
+                <input id="cpassword" class="form-control" name="cpassword" type="password" placeholder="********" class="input-large" required="">
+              </div>
+            </div>
+            <!-- Button -->
+            <div class="control-group">
+              <label class="control-label" for="confirmsignup"></label>
+              <div class="controls">
+                <button id="confirmsignup" name="confirmsignup" class="btn btn-success" type="submit">Sign Up</button>
+              </div>
+            </div>
+            </fieldset>
+            </form>
+      </div>
+    </div>
+      </div>
+      <div class="modal-footer">
+      <center>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </center>
+      </div>
+    </div>
+  </div>
 </div>
 
-<br>
 </body>
 </head>
 </html>
