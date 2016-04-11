@@ -32,6 +32,9 @@ padding-bottom:70px;
 clear:both;
 padding-top:50px;
 }
+.bord {
+border: medium solid;
+}
 </style>
 </head>
 <body>
@@ -115,7 +118,78 @@ else {
 <h2 align="center">Business Model Creation</h2> 
  </div>
  <div class="empty"></div>
- 
+<div class="row"> 
+ <div class="col-sm-1 col-md-1 col-lg-1"></div>
+ <div class="col-sm-2 col-md-2 col-lg-2 bord">
+ 	<div class="row"><h2>Key Partners</h2></div>
+ 	<div class="empty"></div>
+ 	<div class="empty"></div>
+ 	<div class="row">What partnerships are necessary for survival?</div>
+ 	<div class="empty"></div>
+ 	<div class="empty"></div>
+ 	<div class="empty"></div>
+ 	<div class="empty"></div>
+ </div>
+ <div class="col-sm-2 col-md-2 col-lg-2 bord">
+ 	<div class="row"><h2>Key Activities</h2></div>
+ 	<div class="empty"></div>
+ 	<div style="padding-top:17px"></div>
+ 	<div class="row">What are the activities that are essential to your brand?</div>
+ 	<div class="empty"></div>
+ 	<div class="row"><h2>Key Resources</h2></div>
+ 	<div class="empty"></div>
+ 	<div class="row">What are the resources that are essential to your brand?</div>
+ 	<div class="empty"></div>
+ </div>
+ <div class="col-sm-2 col-md-2 col-lg-2 bord">
+ 	<div class="row"><h2>Value Propositions</h2></div>
+ 	<div class="empty"></div>
+ 	<div class="empty"></div>
+ 	<div class="row">What makes you different and unique?</div>
+ 	<div class="empty"></div>
+ 	<div class="empty"></div>
+ 	<div class="empty"></div>
+    <div class="empty"></div>
+</div>
+ <div class="col-sm-2 col-md-2 col-lg-2 bord">
+ 	<div class="row"><h2>Customer Relationships</h2></div>
+ 	<div class="empty"></div>
+ 	<div style="padding-top:4px"></div>
+ 	<div class="row">What are you doing to maintain customer relationships?</div>
+ 	<div class="empty"></div>
+ 	<div class="row"><h2>Channels</h2></div>
+ 	<div class="empty"></div>
+ 	<div class="row">What are your distribution and other channels?</div>
+ 	<div class="empty"></div> </div>
+ <div class="col-sm-2 col-md-2 col-lg-2 bord">
+ 	 	<div class="row"><h2>Customer Segments</h2></div>
+ 	<div class="empty"></div>
+ 	<div class="empty"></div>
+ 	<div class="row">What is your Target Audience?</div>
+ 	<div class="empty"></div>
+ 	<div class="empty"></div>
+ 	<div class="empty"></div>
+ 	<div class="empty"></div>
+ </div>
+ <div class="col-sm-1 col-md-1 col-lg-1"></div>
+</div>
+<div class="row">
+	<div class="col-sm-1 col-md-1 col-lg-1"></div>
+	<div class="col-sm-5 col-md-5 col-lg-5 bord">
+		<div class="row"><h2>Cost Structure</h2></div>
+		<div class="empty"></div>
+		<div class="row">Your expenditure details</div>
+		<div class="empty"></div>
+	</div>
+	<div class="col-sm-5 col-md-5 col-lg-5 bord">
+		<div class="row"><h2>Revenue Streams</h2></div>
+		<div class="empty"></div>
+		<div class="row">Your benefits/earning details</div>
+		<div class="empty"></div>		
+	</div>
+	<div class="col-sm-1 col-md-1 col-lg-1"></div>
+</div>
+<div class="empty"></div>
 <%
 }
 %>
