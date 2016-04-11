@@ -18,7 +18,7 @@ if(session.getAttribute("username")==null)
 {
 String message="Kindly login before accessing this page";
 request.setAttribute("msg",message);
-response.sendRedirect("/login.jsp");
+response.sendRedirect("login.jsp");
 }
 if(request.getParameter("name")==null)
 {
@@ -48,7 +48,7 @@ padding-top:50px;
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/"><img src="images/startat-logo-navbar.png"></a>
+      <a class="navbar-brand" href="index.jsp"><img src="images/startat-logo-navbar.png"></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="page.jsp?name=about">About</a></li>
@@ -103,7 +103,7 @@ if(request.getParameter("name")==null)
 				<div class="col-sm-1 col-md-1 col-lg-1"></div>
 				<div class="col-sm-2 col-md-2 col-lg-2"><%=c.getField_of_interest() %></div>
 				<div class="col-sm-1 col-md-1 col-lg-1"></div>
-				<div class="col-sm-3 col-md-3 col-lg-3"><%=c.getVerification() %><%if(c.getVerification()=="no"){%><a class="btn btn-primary" href="addveri.jsp?name=<%=c.getCId()%>">Get Verified</a><%} %></div>
+				<div class="col-sm-3 col-md-3 col-lg-3"><%=c.getVerification() %><%if(c.getVerification()=="No"){%><a class="btn btn-primary" href="addveri.jsp?name=<%=c.getCId()%>">Get Verified</a><%} %></div>
 			</div>
 			<%	
 			}
@@ -122,7 +122,7 @@ else {
  </div>
  <div class="col-sm-4 col-md-4 col-lg-4">
  <div class="row"><h3>Valuation:<small><% if(c.getValuation()==null){%>Not Set<% }else{ %><%=c.getValuation() %><%} %></small></h3></div>
- <%if(c.getVerification()=="no") { %><div class="row">c.getVerification() <a class="btn btn-primary" href="addveri.jsp?name=<%=c.getCId()%>">Get Verified</a></div><% } %>
+ <%if(c.getVerification()=="No") { %><div class="row">c.getVerification() <a class="btn btn-primary" href="addveri.jsp?name=<%=c.getCId()%>">Get Verified</a></div><% } %>
  </div>
 <%
 }

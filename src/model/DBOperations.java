@@ -24,7 +24,7 @@ public class DBOperations {
 	public static User getUserDetails(String username)
 	{
 		User u=new User();
-		String sql="SELECT Name,Description,Profile_Pic_Path,Email,Mobno FROM User WHERE Username='"+username+"'";
+		String sql="SELECT Name,Description,Profile_Pic_Path,EmailId,Mobno FROM User WHERE Username='"+username+"'";
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
@@ -97,7 +97,7 @@ public class DBOperations {
 	public static Vector<String> getAllCompanyLogoPath(String username)
 	{
 		Vector<String> logos=new Vector<String>();
-		String sql="SELECT logo_path FROM Company WHERE Username='"+username+"'";
+		String sql="SELECT Logo_Path FROM Company WHERE Username='"+username+"'";
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
@@ -113,7 +113,7 @@ public class DBOperations {
 	}
 	public static boolean updateUserSettings(String username,String password,String email)
 	{
-		String sql="UPDATE User SET Password='"+password+"' AND Email='"+email+"' WHERE Username='"+username+"'";
+		String sql="UPDATE User SET Password='"+password+"' AND EmailId='"+email+"' WHERE Username='"+username+"'";
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			int i=ps.executeUpdate();
@@ -147,7 +147,7 @@ public class DBOperations {
 		return page;
 	}
 	public static boolean addCompany(String username,String name,String company_domain,String email,String website,String stage_of_development,String established,String profile,String description){
-		String sql="INSERT INTO Company(Username,Name,Company_Domain,Email,Website,Stage_of_Development,Established,Logo_path,Description) VALUES('"+username+"','"+name+"','"+company_domain+"','"+email+"','"+website+"','"+stage_of_development+"','"+established+"','"+profile+"','"+description+"')";
+		String sql="INSERT INTO Company(Username,Name,Company_Domain,EmailId,Website,Stage_Of_Development,Established,Logo_Path,Description) VALUES('"+username+"','"+name+"','"+company_domain+"','"+email+"','"+website+"','"+stage_of_development+"','"+established+"','"+profile+"','"+description+"')";
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			int i=ps.executeUpdate();
@@ -162,7 +162,7 @@ public class DBOperations {
 		return false;
 	}
 	public static boolean addUser(String username, String email, String password) {
-		String sql="INSERT INTO User(Username,Email,Password) VALUES('"+username+"','"+email+"','"+password+"')";
+		String sql="INSERT INTO User(Username,EmailId,Password) VALUES('"+username+"','"+email+"','"+password+"')";
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			int i=ps.executeUpdate();
@@ -192,7 +192,7 @@ public class DBOperations {
 	}
 	public static Vector<Company> getAllCompanyDetails(String username) {
 		Vector<Company> company=new Vector<Company>();
-		String sql="SELECT Name,Company_Domain,Verification,CId FROM Company WHERE Username='"+username+"'";
+		String sql="SELECT Name,Company_Domain,Verification,CompanyId FROM Company WHERE Username='"+username+"'";
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
@@ -214,7 +214,7 @@ public class DBOperations {
 	}
 	public static Company getCompanyDetails(int CId) {
 		Company c=new Company();
-		String sql="SELECT * FROM Company WHERE CId="+CId;
+		String sql="SELECT * FROM Company WHERE CompanyId="+CId;
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
@@ -233,6 +233,10 @@ public class DBOperations {
 				c.setTotal_profits(rs.getString(11));
 				c.setTotal_expenses(rs.getString(12));
 				c.setUser_id(rs.getString(13));
+				c.setNeed(rs.getString(14));
+				c.setStage_of_development(rs.getString(15));
+				c.setEstablished(rs.getString(16));
+				c.setVid_path(rs.getString(18));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -296,7 +300,7 @@ public class DBOperations {
 	}
 	public static String getNeed(int CId) {
 		String need="unset";
-		String sql="SELECT Need FROM Company WHERE CId="+CId;
+		String sql="SELECT Need FROM Company WHERE CompanyId="+CId;
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
@@ -309,5 +313,40 @@ public class DBOperations {
 			e.printStackTrace();
 		}
 		return need;
+	}
+	public static void setNeed(int CId, String need)
+	{
+		String sql="UPDATE Company SET Need='"+need+"' WHERE CompanyId="+CId;
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			int i=ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void changeStatus(String username){
+		String sql="UPDATE User SET Status=0 WHERE Username='"+username+"'";
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			int i=ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static boolean addVideo(int CId,String path){
+		String sql="UPDATE Company SET Vid_Path='"+path+"' WHERE CId="+CId;
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			int i=ps.executeUpdate();
+			if(i>0){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

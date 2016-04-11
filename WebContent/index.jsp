@@ -8,6 +8,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <title>Startat-Startup Statistics</title>
+<%
+if(session.getAttribute("username")!=null)
+{
+response.sendRedirect("dashboard.jsp");
+}
+%>
 <style>
 .empty {
 clear:both;
@@ -33,7 +39,7 @@ z-index:-5;
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/"><img src="images/startat-logo-navbar.png"></a>
+      <a class="navbar-brand" href="index.jsp"><img src="images/startat-logo-navbar.png"></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="page.jsp?name=about">About</a></li>

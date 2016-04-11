@@ -14,7 +14,7 @@ static void Connect()
 	{
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://loclhost:0336/startat", "TeamStartat", "star123tat");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/startat", "TeamStartat", "star123tat");
 	}
 	catch(ClassNotFoundException | SQLException e)
 	{

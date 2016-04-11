@@ -16,7 +16,7 @@ if(session.getAttribute("username")==null)
 {
 String message="Kindly login before accessing this page";
 request.setAttribute("msg",message);
-response.sendRedirect("/login.jsp");
+response.sendRedirect("login.jsp");
 }
 %>
 <title>Settings | <%=session.getAttribute("username") %></title>

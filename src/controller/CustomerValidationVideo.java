@@ -2,8 +2,6 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,23 +9,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.output.*;
 
 import model.DBOperations;
+
 /**
- * Servlet implementation class Chprodet
+ * Servlet implementation class CustomerValidationVideo
  */
-@WebServlet("/Chprodet")
-public class Chprodet extends HttpServlet {
+@WebServlet("/CustomerValidationVideo")
+public class CustomerValidationVideo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-/**
+       
+    /**
      * @see HttpServlet#HttpServlet()
      */
-    public Chprodet() {
+    public CustomerValidationVideo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,16 +37,9 @@ public class Chprodet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String name=request.getParameter("name");
-		String description=request.getParameter("description");
-		String username=request.getParameter("username");
+		int CId=Integer.parseInt(request.getParameter("CId"));
+		String username=(String)request.getSession().getAttribute("username");
 		String profile="";
-		if(username.equals("")||name.equals("")||description.equals(""))
-		{
-			String message="Required Fields Empty";
-			request.setAttribute("msg1", message);
-			getServletContext().getRequestDispatcher("/profile.jsp").include(request, response);
-		}
 		if (!ServletFileUpload.isMultipartContent(request)) {
             throw new IllegalArgumentException("Request is not multipart, please 'multipart/form-data' enctype for your form.");
         }
@@ -57,7 +50,7 @@ public class Chprodet extends HttpServlet {
             for (FileItem item : items) {
                 if (!item.isFormField()) {
                         File file = new File(request.getServletContext().getRealPath("/")+"useruploads/", item.getName());
-                        profile=request.getServletContext().getRealPath("/")+"useruploads/"+username+"_"+item.getName();
+                        profile=request.getServletContext().getRealPath("/")+"useruploads/"+username+"_"+CId+"_"+item.getName();
                         item.write(file);
                 }
             }
@@ -66,17 +59,14 @@ public class Chprodet extends HttpServlet {
         } catch (Exception e) {
                 throw new RuntimeException(e);
         }
-	    if(DBOperations.addUserProfile(username,name,description,profile))
-	    {
-	    	String message="Changes saved successfully";
-	    	request.setAttribute("msg", message);
-	    	getServletContext().getRequestDispatcher("/profile.jsp").forward(request, response);
-	    }
-	    else
-	    {
-	    	String message="Couldn't save data due to some error. Kindly retry.";
-	    	request.setAttribute("msg1", message);
-	    	getServletContext().getRequestDispatcher("/profile.jsp").include(request, response);
-	    }
-}
+        if(DBOperations.addVideo(CId, profile)){
+        	getServletContext().getRequestDispatcher("/custmval.jsp?name="+CId).include(request,response);
+        }
+        else {
+        	String message="Video could not be uploaded please try again";
+        	request.setAttribute("msg", message);
+        	getServletContext().getRequestDispatcher("/custmval.jsp?name="+CId).include(request,response);
+        }
+	}
+
 }

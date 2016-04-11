@@ -17,7 +17,7 @@ if(session.getAttribute("username")==null)
 {
 String message="Kindly login before accessing this page";
 request.setAttribute("msg",message);
-response.sendRedirect("/login.jsp");
+response.sendRedirect("login.jsp");
 }
 %>
 <title>Add Company | <%=session.getAttribute("username") %></title>
@@ -45,7 +45,7 @@ opacity:0;
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/"><img src="images/startat-logo-navbar.png"></a>
+      <a class="navbar-brand" href="index.jsp"><img src="images/startat-logo-navbar.png"></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="page.jsp?name=about">About</a></li>
@@ -108,7 +108,7 @@ opacity:0;
 		<div class="form-group">
 			<div id="profile-preview"></div>
       		<label for="profile-picture-upload" class="btn btn-primary" id="profile-picture">Upload Image Logo(upload a simple image with company name if logo not yet created)</label>
-			<input type="file" class="form-control" id="profile-picture-upload" name="profile-picture" required>
+			<input type="file" class="form-control" id="profile-picture-upload" name="profile-picture" accept="image/*" required>
       		<h3><small>Kindly upload an image of size 800x600 or of the same ratio for best results</small></h3>
 		</div>
 		<div class="form-group" align="right">

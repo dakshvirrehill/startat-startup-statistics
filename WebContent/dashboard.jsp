@@ -15,7 +15,7 @@ if(session.getAttribute("username")==null)
 {
 String message="Kindly login before accessing this page";
 request.setAttribute("msg",message);
-response.sendRedirect("/login.jsp");
+response.sendRedirect("login.jsp");
 }
 %>
 <title>Dashboard | <%=session.getAttribute("username") %></title>
@@ -34,7 +34,7 @@ padding-top:50px;
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/"><img src="images/startat-logo-navbar.png"></a>
+      <a class="navbar-brand" href="index.jsp"><img src="images/startat-logo-navbar.png"></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="page.jsp?name=about">About</a></li>
@@ -54,7 +54,9 @@ padding-top:50px;
 <div class="empty top"></div>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-2 col-md-2 col-lg-2"></div>
+		<div class="col-sm-2 col-md-2 col-lg-2">
+			<a href="company.jsp" class="btn btn-primary">All Companies</a>
+		</div>
 		<a href="competitive.jsp"><div class="col-sm-2 col-md-2 col-lg-2">
 			<div class="row" align="center">
 				<img src="images/startat-logo-navbar.png" class="img-circle">

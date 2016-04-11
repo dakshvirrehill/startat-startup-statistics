@@ -21,7 +21,7 @@ if(session.getAttribute("username")==null)
 {
 String message="Kindly login before accessing this page";
 request.setAttribute("msg",message);
-response.sendRedirect("/login.jsp");
+response.sendRedirect("login.jsp");
 }
 %>
 <title>InvStart | <%=session.getAttribute("username") %></title>
@@ -38,7 +38,34 @@ padding-top:50px;
 </style>
 </head>
 <body>
+<nav class="navbar navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.jsp"><img src="images/startat-logo-navbar.png"></a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="page.jsp?name=about">About</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="addcomp.jsp">Add a Company</a>
+          <li><a href="profile.jsp">Profile</a></li>
+          <li><a href="settings.jsp">Settings</a></li>
+          <li><a href="logout">Logout</a></li> 
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
 <div class="empty top"></div>
+<div class="container">
+	<ol class="breadcrumb">
+		<li><a href="dashboard.jsp">Dashboard</a></li>
+		<li class="active">InvStart</li>
+	</ol>
+</div>
+<div class="empty"></div>
 <div class="container-fluid">
 <%
 if(request.getParameter("name")==null)
@@ -72,25 +99,45 @@ if(request.getParameter("name")==null)
 			<div class="row">
 				<div class="col-sm-2 col-md-2 col-lg-2"><%=j %></div>
 				<div class="col-sm-1 col-md-1 col-lg-1"></div>
-				<%if(c.getVerification()=="yes") { %><a href="investor.jsp?name=<%=c.getField_of_interest() %>&need=<%=DBOperations.getNeed(c.getCId())%>"><div class="col-sm-2 col-md-2 col-lg-2"><%=c.getName() %></div></a><%} else { %><div class="col-sm-2 col-md-2 col-lg-2"><%=c.getName() %></div><%} %>
+				<%if(c.getVerification().equals("Yes")) { %><a href="investor.jsp?name=<%=c.getField_of_interest() %>&CId=<%=c.getCId() %>"><div class="col-sm-2 col-md-2 col-lg-2"><%=c.getName() %></div></a><%} else { %><div class="col-sm-2 col-md-2 col-lg-2"><%=c.getName() %></div><%} %>
 				<div class="col-sm-1 col-md-1 col-lg-1"></div>
 				<div class="col-sm-2 col-md-2 col-lg-2"><%=c.getField_of_interest() %></div>
 				<div class="col-sm-1 col-md-1 col-lg-1"></div>
-				<div class="col-sm-3 col-md-3 col-lg-3"><%=c.getVerification() %><%if(c.getVerification()=="no"){%><a class="btn btn-primary" href="addveri.jsp?name=<%=c.getCId()%>">Get Verified</a><%} %></div>
+				<div class="col-sm-3 col-md-3 col-lg-3"><%=c.getVerification() %><%if(c.getVerification().equals("No")){%><a class="btn btn-primary" href="addveri.jsp?name=<%=c.getCId()%>">Get Verified</a><%} %></div>
 			</div>
 			<%	
 			}
 		}
 }
 else {
-	Connections c=DBOperations.getPossibleConnections((String)request.getParameter("name"),(String)request.getParameter("need"));
-	Vector<Investor> i=c.getInvestor();
-	Vector<Startup> s=c.getStartup();
-	%>
+	String need=DBOperations.getNeed(Integer.parseInt((String)request.getParameter("CId")));
+%>
 <div class="jumbotron">
  <h1 align="center">Investor/Startup Connections</h1> 
  </div>
  <div class="empty"></div>
+<%
+	if(need=="unset"){
+%>
+<form action="AddNeed" method="post" role="form" class="form-horizontal">
+	<div class="form-group">
+		<label for="need" class="control-label">Need:</label>
+		<input id="need" name="need" class="form-control" placeholder="Enter your need if any(for startup bonding not for investors)" required>
+	</div>
+	<div class="form-group">
+		<input type="text" name="name" value="<%=request.getParameter("name") %>" hidden>
+		<input type="text" name="CId" value="<%=request.getParameter("CId") %>" hidden>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</div>
+</form>
+<%		
+	}
+	else
+	{
+	Connections c=DBOperations.getPossibleConnections((String)request.getParameter("name"),need);
+	Vector<Investor> i=c.getInvestor();
+	Vector<Startup> s=c.getStartup();
+	%>
  <div class="col-sm-6 col-md-6 col-lg-6">
  	<div class="row"><h2>Investors <small>you might be interested in</small></h2></div>
  	<div class="empty"></div>
@@ -157,6 +204,7 @@ while(j.hasNext()) {
 %>
  </div>
 <%
+	}
 }
 %>
 </div>
