@@ -121,7 +121,7 @@ else {
 <div class="row"> 
  <div class="col-sm-1 col-md-1 col-lg-1"></div>
  <div class="col-sm-2 col-md-2 col-lg-2 bord">
- 	<div class="row"><h2>Key Partners</h2></div>
+ <a href="#kp" id="keyp" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the eighth position among others"><div class="row"><h2>Key Partners</h2></div>
  	<div class="empty"></div>
  	<div class="empty"></div>
  	<div class="row">What partnerships are necessary for survival?</div>
@@ -129,20 +129,23 @@ else {
  	<div class="empty"></div>
  	<div class="empty"></div>
  	<div class="empty"></div>
+ 	<div class="empty"></div></a>
  </div>
  <div class="col-sm-2 col-md-2 col-lg-2 bord">
- 	<div class="row"><h2>Key Activities</h2></div>
+ 	<a href="#ka" id="keya"  data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the seventh position among others"><div class="row"><h2>Key Activities</h2></div>
  	<div class="empty"></div>
  	<div style="padding-top:17px"></div>
  	<div class="row">What are the activities that are essential to your brand?</div>
- 	<div class="empty"></div>
+ 	<div class="empty"></div></a><a href="#kr" id="keyr" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the sixth position among others">
  	<div class="row"><h2>Key Resources</h2></div>
  	<div class="empty"></div>
  	<div class="row">What are the resources that are essential to your brand?</div>
  	<div class="empty"></div>
+ 	<div class="empty"></div>
+ 	<div style="padding-top:20px"></div></a>
  </div>
  <div class="col-sm-2 col-md-2 col-lg-2 bord">
- 	<div class="row"><h2>Value Propositions</h2></div>
+ 	<a href="#vp" id="valuep" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the second position among others"><div class="row"><h2>Value Propositions</h2></div>
  	<div class="empty"></div>
  	<div class="empty"></div>
  	<div class="row">What makes you different and unique?</div>
@@ -150,19 +153,22 @@ else {
  	<div class="empty"></div>
  	<div class="empty"></div>
     <div class="empty"></div>
+    <div style="padding-top:37px"></div></a>
 </div>
  <div class="col-sm-2 col-md-2 col-lg-2 bord">
- 	<div class="row"><h2>Customer Relationships</h2></div>
+ 	<a href="#cr" id="customerr" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the forth position among others"><div class="row"><h2>Customer Relationships</h2></div>
  	<div class="empty"></div>
  	<div style="padding-top:4px"></div>
  	<div class="row">What are you doing to maintain customer relationships?</div>
- 	<div class="empty"></div>
+ 	<div class="empty"></div></a><a href="#c" id="channels" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the third position among others"> 
  	<div class="row"><h2>Channels</h2></div>
  	<div class="empty"></div>
  	<div class="row">What are your distribution and other channels?</div>
- 	<div class="empty"></div> </div>
+ 	<div class="empty"></div>
+ 	<div class="empty"></div></a>
+ </div>
  <div class="col-sm-2 col-md-2 col-lg-2 bord">
- 	 	<div class="row"><h2>Customer Segments</h2></div>
+  	<a href="#cs" id="customers" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the first position among others"><div class="row"><h2>Customer Segments</h2></div>
  	<div class="empty"></div>
  	<div class="empty"></div>
  	<div class="row">What is your Target Audience?</div>
@@ -170,25 +176,162 @@ else {
  	<div class="empty"></div>
  	<div class="empty"></div>
  	<div class="empty"></div>
+ 	<div style="padding-top:57px"></div></a>
  </div>
  <div class="col-sm-1 col-md-1 col-lg-1"></div>
 </div>
 <div class="row">
 	<div class="col-sm-1 col-md-1 col-lg-1"></div>
 	<div class="col-sm-5 col-md-5 col-lg-5 bord">
-		<div class="row"><h2>Cost Structure</h2></div>
+		<a href="#cos" id="costs" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the nineth position among others"><div class="row"><h2>Cost Structure</h2></div>
 		<div class="empty"></div>
 		<div class="row">Your expenditure details</div>
-		<div class="empty"></div>
+		<div class="empty"></div></a>
 	</div>
 	<div class="col-sm-5 col-md-5 col-lg-5 bord">
-		<div class="row"><h2>Revenue Streams</h2></div>
+		<a href="#rs" id="revenues" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the fifth position among others"><div class="row"><h2>Revenue Streams</h2></div>
 		<div class="empty"></div>
 		<div class="row">Your benefits/earning details</div>
-		<div class="empty"></div>		
+		<div class="empty"></div></a>		
 	</div>
 	<div class="col-sm-1 col-md-1 col-lg-1"></div>
 </div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div id="cs">
+	<h3>Customer Segments</h3>
+	<p class="text-justify bg-primary">In this part of business model you explain about your target audience. For example, if your company produces Video Games which are violent and PG-18. You would be targeting audience in the demographic of 18-30 age group,etc.<small> Kindly input all possible customer segments for your company. (Separate them with ;)</small></p>
+	<form action="BMC" method="post" role="form" class="form-horizontal">
+		<div class="form-group">
+			<label for="CustomerSegments" class="control-label">Customer Segments:</label>
+			<textarea rows="4" id="CustomerSegments" class="form-control" name="CustomerSegments" placeholder="Enter ';' seperated values"></textarea>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" name="csmseg">Update</button>
+		</div>
+	</form>
+</div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div id="vp">
+	<h3>Value Propositions</h3>
+	<p class="text-justify bg-primary">In this part of business model you explain about your value i.e. what makes your company different from other companies in your domain and what value are you providing your customers. For example, The psychotic villains of DC Comics makes it different from other comics<small> Kindly input all possible value propositions for your company. (Separate them with ;)</small></p>
+	<form action="BMC" method="post" role="form" class="form-horizontal">
+		<div class="form-group">
+			<label for="ValuePropositions" class="control-label">ValuePropositions:</label>
+			<textarea rows="4" id="ValuePropositions" class="form-control" name="ValuePropostions" placeholder="Enter ';' seperated values"></textarea>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" name="valprop">Update</button>
+		</div>
+	</form>	
+</div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div id="c">
+	<h3>Channels</h3>
+	<p class="text-justify bg-primary">In this part of business model you explain about your transmission mediums. How your product is reaching your target audience is the question that needs to be answered here. Channels need not be specific. For example, for a retail store channels could be the store directly or courier services.<small> Kindly input all possible channels for your company. (Separate them with ;)</small></p>
+	<form action="BMC" method="post" role="form" class="form-horizontal">
+		<div class="form-group">
+			<label for="ChannelsVal" class="control-label">Channels:</label>
+			<textarea rows="4" id="ChannelsVal" class="form-control" name="ChannelsVal" placeholder="Enter ';' seperated values"></textarea>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" name="chanval">Update</button>
+		</div>
+	</form>	
+</div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div id="cr">
+	<h3>Customer Relationships</h3>
+		<p class="text-justify bg-primary">In this part of business model you explain about all the steps that are being taken by your company to maintain your customer base. These could be offers, discounts or any kind of schemes that are released to keep the customer satisfied and interested and not move to some other company.<small> Kindly input all possible Customer Relationships for your company. (Separate them with ;)</small></p>
+	<form action="BMC" method="post" role="form" class="form-horizontal">
+		<div class="form-group">
+			<label for="CustomerRelationships" class="control-label">Customer Relationships:</label>
+			<textarea rows="4" id="CustomerRelationships" class="form-control" name="CustomerRelationships" placeholder="Enter ';' seperated values"></textarea>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" name="custrel">Update</button>
+		</div>
+	</form>	
+</div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div id="rs">
+	<h3>Revenue Streams</h3>
+	<p class="text-justify bg-primary">In this part of business model you explain about your company's profit source i.e. all the products and services that your company earns from. For example for a vehicle manufacturing company, all vehicles that earn the company profit<small> Kindly input all possible Revenue Streams for your company. (Separate them with ;)</small></p>
+	<form action="BMC" method="post" role="form" class="form-horizontal">
+		<div class="form-group">
+			<label for="RevenueStreams" class="control-label">Revenue Streams:</label>
+			<textarea rows="4" id="RevenueStreams" class="form-control" name="RevenueStreams" placeholder="Enter ';' seperated values"></textarea>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" name="revstream">Update</button>
+		</div>
+	</form>	
+</div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div id="kr">
+	<h3>Key Resources</h3>
+	<p class="text-justify bg-primary">In this part of business model you explain about your resources that are essential for the development and management of the product. For example for a food processing company that makes chocolates, resources would be factories, raw materials, machines and workers.<small> Kindly input all possible key resources for your company. (Separate them with ;)</small></p>
+	<form action="BMC" method="post" role="form" class="form-horizontal">
+		<div class="form-group">
+			<label for="KeyResources" class="control-label">Key Resources:</label>
+			<textarea rows="4" id="KeyResources" class="form-control" name="KeyResources" placeholder="Enter ';' seperated values"></textarea>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" name="keyres">Update</button>
+		</div>
+	</form>	
+</div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div id="ka">
+	<h3>Key Activities</h3>
+	<p class="text-justify bg-primary">In this part of business model you explain about what are the essential functional requirements for developing the product. For example for landscaping company, scoping  the complete property is a key activity<small> Kindly input all possible key activities for your company. (Separate them with ;)</small></p>
+	<form action="BMC" method="post" role="form" class="form-horizontal">
+		<div class="form-group">
+			<label for="KeyActivities" class="control-label">Key Activities:</label>
+			<textarea rows="4" id="KeyActivities" class="form-control" name="KeyActivities" placeholder="Enter ';' seperated values"></textarea>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" name="keyact">Update</button>
+		</div>
+	</form>	
+</div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div id="kp">
+	<h3>Key Partners</h3>
+	<p class="text-justify bg-primary">In this part of business model you explain about the key partnerships and collaborations that are integral to the company's survival. For example when Hero Honda established in India, Hero had most of the key resources and Honda had the experience and funding which made it a key partnership in India.<small> Kindly input all possible key partnerships for your company. (Separate them with ;)</small></p>
+	<form action="BMC" method="post" role="form" class="form-horizontal">
+		<div class="form-group">
+			<label for="KeyPartners" class="control-label">Key Partners:</label>
+			<textarea rows="4" id="KeyPartners" class="form-control" name="KeyPartners" placeholder="Enter ';' seperated values"></textarea>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" name="keypart">Update</button>
+		</div>
+	</form>	
+</div>
+<div class="empty"></div>
+<div class="empty"></div>
+<div id="cos">
+	<h3>Cost Structure</h3>
+	<p class="text-justify bg-primary">In this part of business model you explain about the expenses of the company. This part includes all possible expenditures including hiring and firing costs as per your company's set up. For example, The cost structure for a wooden desk maker would be the cost of wood, equipment,nails and glue.<small> Kindly input all possible cost structure for your company. (Separate them with ;)</small></p>
+	<form action="BMC" method="post" role="form" class="form-horizontal">
+		<div class="form-group">
+			<label for="CostStructure" class="control-label">Cost Structure:</label>
+			<textarea rows="4" id="CostStructure" class="form-control" name="CostStructure" placeholder="Enter ';' seperated values"></textarea>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" name="coststruct">Update</button>
+		</div>
+	</form>
+</div>
+<div class="empty"></div>
 <div class="empty"></div>
 <%
 }
@@ -198,5 +341,136 @@ else {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>   
+<script type="text/javascript">
+$(document).ready(function(){
+	$('[data-toggle="tooltip"]').tooltip();
+	$('#keyp').on('click',function(event){
+		// Prevent default anchor click behavior
+	    event.preventDefault();
+	    // Store hash
+	    var hash = this.hash;
+	    // Using jQuery's animate() method to add smooth page scroll
+	    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+	    $('html, body').animate({
+	      scrollTop: $(hash).offset().top
+	    }, 800, function(){
+	      // Add hash (#) to URL when done scrolling (default click behavior)
+	      window.location.hash = hash;
+	    });
+	});
+	$('#keya').on('click',function(event){
+		// Prevent default anchor click behavior
+	    event.preventDefault();
+	    // Store hash
+	    var hash = this.hash;
+	    // Using jQuery's animate() method to add smooth page scroll
+	    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+	    $('html, body').animate({
+	      scrollTop: $(hash).offset().top
+	    }, 800, function(){
+	      // Add hash (#) to URL when done scrolling (default click behavior)
+	      window.location.hash = hash;
+	    });
+	});
+	$('#keyr').on('click',function(event){
+		// Prevent default anchor click behavior
+	    event.preventDefault();
+	    // Store hash
+	    var hash = this.hash;
+	    // Using jQuery's animate() method to add smooth page scroll
+	    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+	    $('html, body').animate({
+	      scrollTop: $(hash).offset().top
+	    }, 800, function(){
+	      // Add hash (#) to URL when done scrolling (default click behavior)
+	      window.location.hash = hash;
+	    });
+	});
+	$('#valuep').on('click',function(event){
+		// Prevent default anchor click behavior
+	    event.preventDefault();
+	    // Store hash
+	    var hash = this.hash;
+	    // Using jQuery's animate() method to add smooth page scroll
+	    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+	    $('html, body').animate({
+	      scrollTop: $(hash).offset().top
+	    }, 800, function(){
+	      // Add hash (#) to URL when done scrolling (default click behavior)
+	      window.location.hash = hash;
+	    });
+	});
+	$('#customerr').on('click',function(event){
+		// Prevent default anchor click behavior
+	    event.preventDefault();
+	    // Store hash
+	    var hash = this.hash;
+	    // Using jQuery's animate() method to add smooth page scroll
+	    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+	    $('html, body').animate({
+	      scrollTop: $(hash).offset().top
+	    }, 800, function(){
+	      // Add hash (#) to URL when done scrolling (default click behavior)
+	      window.location.hash = hash;
+	    });
+	});
+	$('#channels').on('click',function(event){
+		// Prevent default anchor click behavior
+	    event.preventDefault();
+	    // Store hash
+	    var hash = this.hash;
+	    // Using jQuery's animate() method to add smooth page scroll
+	    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+	    $('html, body').animate({
+	      scrollTop: $(hash).offset().top
+	    }, 800, function(){
+	      // Add hash (#) to URL when done scrolling (default click behavior)
+	      window.location.hash = hash;
+	    });
+	});
+	$('#customers').on('click',function(event){
+		// Prevent default anchor click behavior
+	    event.preventDefault();
+	    // Store hash
+	    var hash = this.hash;
+	    // Using jQuery's animate() method to add smooth page scroll
+	    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+	    $('html, body').animate({
+	      scrollTop: $(hash).offset().top
+	    }, 800, function(){
+	      // Add hash (#) to URL when done scrolling (default click behavior)
+	      window.location.hash = hash;
+	    });
+	});
+	$('#costs').on('click',function(event){
+		// Prevent default anchor click behavior
+	    event.preventDefault();
+	    // Store hash
+	    var hash = this.hash;
+	    // Using jQuery's animate() method to add smooth page scroll
+	    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+	    $('html, body').animate({
+	      scrollTop: $(hash).offset().top
+	    }, 800, function(){
+	      // Add hash (#) to URL when done scrolling (default click behavior)
+	      window.location.hash = hash;
+	    });
+	});
+	$('#revenues').on('click',function(event){
+		// Prevent default anchor click behavior
+	    event.preventDefault();
+	    // Store hash
+	    var hash = this.hash;
+	    // Using jQuery's animate() method to add smooth page scroll
+	    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+	    $('html, body').animate({
+	      scrollTop: $(hash).offset().top
+	    }, 800, function(){
+	      // Add hash (#) to URL when done scrolling (default click behavior)
+	      window.location.hash = hash;
+	    });
+	});
+});
+</script>
 </body>
 </html>

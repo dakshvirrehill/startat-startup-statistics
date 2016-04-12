@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -37,7 +38,8 @@ public class CustomerValidationVideo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int CId=Integer.parseInt(request.getParameter("CId"));
+		String CID=request.getParameter("cid");
+		int CId=Integer.parseInt(CID);
 		String username=(String)request.getSession().getAttribute("username");
 		String profile="";
 		if (!ServletFileUpload.isMultipartContent(request)) {

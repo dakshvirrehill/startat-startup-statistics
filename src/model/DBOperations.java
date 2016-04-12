@@ -5,29 +5,51 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 public class DBOperations {
-	static Connection con=DBConnection.getConnection();
-	public static int checkStatus(String username)
-	{
+	private static Connection con=DBConnection.getConnection();
+	private static int insertOrUpdate(String sql) {
+		int i=0;
 		try {
-			String sql="SELECT Status FROM User WHERE Username='"+username+"'";
 			PreparedStatement ps=con.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			if(rs.next())
-			{
-				return rs.getInt(1);
-			}
+			i=ps.executeUpdate();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return i;
+	}
+	private static ResultSet selectQuery(String sql) {
+		ResultSet rs = null;
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			rs=ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	public static int checkStatus(String username)
+	{
+			String sql="SELECT Status FROM User WHERE Username='"+username+"'";
+			ResultSet rs=selectQuery(sql);
+			try {
+				if(rs.next())
+				{
+					return rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		return 0;
 	}
 	public static User getUserDetails(String username)
 	{
 		User u=new User();
 		String sql="SELECT Name,Description,Profile_Pic_Path,EmailId,Mobno FROM User WHERE Username='"+username+"'";
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
+		
+			ResultSet rs=selectQuery(sql);
+		try {	
 			if(rs.next())
 			{
 				u.setUsername(username);
@@ -44,43 +66,29 @@ public class DBOperations {
 	}
 	public static boolean addUserProfile(String username, String name, String description, String Profile_Pic_Path) {
 		String sql="UPDATE User SET Name='"+name+"' AND Description='"+description+"' AND Profile_Pic_Path='"+Profile_Pic_Path+"' AND Status=1 WHERE Username='"+username+"'";
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			int i=ps.executeUpdate();
-			if(i>0)
-			{
-				return true;
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int i=insertOrUpdate(sql);
+		if(i>0)
+		{
+			return true;
 		}
 		return false;
 	}
 	public static boolean addUserStatus(String username, String status)
 	{
 		String sql="INSERT INTO POST(Username,Post,Type) VALUES('"+username+"','"+status+"','status')";
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			int i=ps.executeUpdate();
-			if(i>0)
-			{
-				return true;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int i=insertOrUpdate(sql);
+		if(i>0)
+		{
+			return true;
 		}
 		return false;
 	}
 	public static Vector<Post> getAllUserUpdates(String username) {
 		Vector<Post> p=new Vector<Post>();
 		String sql="SELECT * FROM POST WHERE Username='"+username+"'";
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
+		ResultSet rs=selectQuery(sql);
 			Post post=new Post();
+		try{
 			while(rs.next())
 			{
 				post.setUsername(username);
@@ -98,9 +106,8 @@ public class DBOperations {
 	{
 		Vector<String> logos=new Vector<String>();
 		String sql="SELECT Logo_Path FROM Company WHERE Username='"+username+"'";
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
+		ResultSet rs=selectQuery(sql);
+		try{
 			while(rs.next())
 			{
 				logos.add(rs.getString(1));
@@ -114,25 +121,18 @@ public class DBOperations {
 	public static boolean updateUserSettings(String username,String password,String email)
 	{
 		String sql="UPDATE User SET Password='"+password+"' AND EmailId='"+email+"' WHERE Username='"+username+"'";
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			int i=ps.executeUpdate();
-			if(i>0)
-			{
-				return true;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int i=insertOrUpdate(sql);
+		if(i>0)
+		{
+			return true;
 		}
 		return false;
 	}
 	public static Page getPage(String slug) {
 		Page page=new Page();
 		String sql="SELECT * FROM Page WHERE Slug='"+slug+"'";
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
+		ResultSet rs=selectQuery(sql);
+		try{
 			if(rs.next())
 			{
 				page.setSlug(slug);
@@ -148,39 +148,25 @@ public class DBOperations {
 	}
 	public static boolean addCompany(String username,String name,String company_domain,String email,String website,String stage_of_development,String established,String profile,String description){
 		String sql="INSERT INTO Company(Username,Name,Company_Domain,EmailId,Website,Stage_Of_Development,Established,Logo_Path,Description) VALUES('"+username+"','"+name+"','"+company_domain+"','"+email+"','"+website+"','"+stage_of_development+"','"+established+"','"+profile+"','"+description+"')";
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			int i=ps.executeUpdate();
-			if(i>0)
-			{
-				return true;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int i=insertOrUpdate(sql);
+		if(i>0)
+		{
+			return true;
 		}
 		return false;
 	}
 	public static boolean addUser(String username, String email, String password) {
 		String sql="INSERT INTO User(Username,EmailId,Password) VALUES('"+username+"','"+email+"','"+password+"')";
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			int i=ps.executeUpdate();
-			if(i>0){
-				return true;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int i=insertOrUpdate(sql);
+		if(i>0){
+			return true;
 		}
 		return false;
 	}
 	public static boolean checkUser(String username,String password) {
-		
 		String sql="SELECT Username FROM User WHERE Username='"+username+"' AND Password='"+password+"'";
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
+		ResultSet rs=selectQuery(sql);
+		try{
 			if(rs.next()){
 				return true;
 			}
@@ -193,10 +179,9 @@ public class DBOperations {
 	public static Vector<Company> getAllCompanyDetails(String username) {
 		Vector<Company> company=new Vector<Company>();
 		String sql="SELECT Name,Company_Domain,Verification,CompanyId FROM Company WHERE Username='"+username+"'";
+		ResultSet rs=selectQuery(sql);
+		Company c=new Company();
 		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			Company c=new Company();
 			while(rs.next())
 			{
 				c.setName(rs.getString(1));
@@ -209,15 +194,13 @@ public class DBOperations {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return company;
 	}
 	public static Company getCompanyDetails(int CId) {
 		Company c=new Company();
 		String sql="SELECT * FROM Company WHERE CompanyId="+CId;
+		ResultSet rs=selectQuery(sql);
 		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
 			if(rs.next())
 			{
 				c.setCId(rs.getInt(1));
@@ -247,16 +230,10 @@ public class DBOperations {
 	public static boolean getVerified(String CId,String verified_path){
 		int Cid=Integer.parseInt(CId);
 		String sql="UPDATE Company SET Ownership_Proof_Path='"+verified_path+"' AND Verification='yes' WHERE CId="+Cid;
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			int i=ps.executeUpdate();
-			if(i>0)
-			{
-				return true;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int i=insertOrUpdate(sql);
+		if(i>0)
+		{
+			return true;
 		}
 		return false;
 	}
@@ -266,10 +243,9 @@ public class DBOperations {
 		Vector<Startup> str=c.getStartup();
 		String sql1="SELECT * FROM Investor WHERE Field_Of_Investment='"+field_of_interest+"'";
 		String sql2="SELECT * FROM Company WHERE Company_Domain='"+need+"'";
+		ResultSet rs=selectQuery(sql1);
+		Investor i=new Investor();
 		try {
-			PreparedStatement ps=con.prepareStatement(sql1);
-			ResultSet rs=ps.executeQuery();
-			Investor i=new Investor();
 			while(rs.next()) {
 				i.setName(rs.getString(2));
 				i.setField_of_investment(rs.getString(3));
@@ -279,8 +255,7 @@ public class DBOperations {
 				i.setContact_no(rs.getString(7));
 				inv.add(i);
 			}
-			ps=con.prepareStatement(sql2);
-			rs=ps.executeQuery();
+			rs=selectQuery(sql2);
 			Startup s=new Startup();
 			while(rs.next()){
 				s.setName(rs.getString(2));
@@ -301,9 +276,8 @@ public class DBOperations {
 	public static String getNeed(int CId) {
 		String need="unset";
 		String sql="SELECT Need FROM Company WHERE CompanyId="+CId;
+		ResultSet rs=selectQuery(sql);
 		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
 			if(rs.next())
 			{
 				need=rs.getString(1);
@@ -314,38 +288,57 @@ public class DBOperations {
 		}
 		return need;
 	}
-	public static void setNeed(int CId, String need)
+	public static boolean setNeed(int CId, String need)
 	{
 		String sql="UPDATE Company SET Need='"+need+"' WHERE CompanyId="+CId;
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			int i=ps.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int i=insertOrUpdate(sql);
+		if(i>0) {
+			return true;
 		}
+		return false;
 	}
-	public static void changeStatus(String username){
+	public static boolean changeStatus(String username){
 		String sql="UPDATE User SET Status=0 WHERE Username='"+username+"'";
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			int i=ps.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int i=insertOrUpdate(sql);
+		if(i>0) {
+			return true;
 		}
+		return false;
 	}
 	public static boolean addVideo(int CId,String path){
-		String sql="UPDATE Company SET Vid_Path='"+path+"' WHERE CId="+CId;
+		String sql="UPDATE Company SET Vid_Path='"+path+"' WHERE CompanyId="+CId;
+		int i=insertOrUpdate(sql);
+		if(i>0){
+			return true;
+		}
+		return false;
+	}
+	public static boolean addBMData(String tag,String val,int CId) {
+		String sql="INSERT INTO BusinessModelData Values("+CId+",'"+tag+"','"+val+"')";
+		int i=insertOrUpdate(sql);
+		if(i>0) {
+			return true;
+		}
+		return false;
+	}
+	public static boolean checkBMData(String tag, int CId) {
+		String sql="SELECT BMData FROM BusinessModelData WHERE BMTag='"+tag+"' AND CompanyId="+CId;
+		ResultSet rs=selectQuery(sql);
 		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			int i=ps.executeUpdate();
-			if(i>0){
+			if(rs.next()) {
 				return true;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		return false;
+	}
+	public static boolean updateBMData(String tag, String val, int CId) {
+		String sql="UPDATE BusinessModelData SET BMData='"+val+"' WHERE BMTag='"+tag+"' AND CompanyId="+CId;
+		int i=insertOrUpdate(sql);
+		if(i>0) {
+			return true;
 		}
 		return false;
 	}

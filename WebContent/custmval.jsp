@@ -107,7 +107,8 @@ if(request.getParameter("name")==null)
 		}
 }
 else {
-	Company c=DBOperations.getCompanyDetails(Integer.parseInt(request.getParameter("name")));
+	int cid=Integer.parseInt(request.getParameter("name"));
+	Company c=DBOperations.getCompanyDetails(cid);
 %>
 <div class="jumbotron">
  <div align="right"><img src="<%=c.getLogo_path()%>"></div><h1><%=c.getName() %></h1><h3><a href="<%=c.getWebsite() %>"><%=c.getWebsite()%></a></h3><h3><a href="mailto:<%=c.getEmail() %>"><%=c.getEmail()%></a></h3>
@@ -117,13 +118,13 @@ else {
  <div class="container-fluid">
  <h2>Upload a Short Video(Maximum 5 minutes) that briefly explains your startup idea, problem statement and how are you tackling that problem</h2>
  <h2><short>Kindly create your business model before using this module for more efficient validation</short></h2>
- <form role="form" action="CustomerValidationVideo" method="post" class="form-horizontal" enctype="multipart/formdata">
+ <form role="form" action="CustomerValidationVideo" method="post" class="form-horizontal" enctype="multipart/form-data">
  	<div class="form-group">
  		<label for="vid" class="control-label">Upload Video:(mp4 format)</label>
  		<input type="file" class="form-control" id="vid" name="vid" accept="video/mp4" placeholder="Upload Validation Video">
  	</div>
  	<div class="form-group">
- 		<input type="text" value="<%=c.getCId() %>" name="CId" hidden>
+ 		<input type="text" name="cid" value="<%=cid %>" hidden>
  		<button type="submit" class="btn btn-primary">Upload</button>
  	</div>
  </form>

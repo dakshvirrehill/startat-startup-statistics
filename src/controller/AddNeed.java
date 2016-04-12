@@ -32,7 +32,11 @@ public class AddNeed extends HttpServlet {
 		String need=request.getParameter("need");
 		String name=request.getParameter("name");
 		int CId=Integer.parseInt((String)request.getParameter("CId"));
-		DBOperations.setNeed(CId, need);
+		boolean a=DBOperations.setNeed(CId, need);
+		if(a) {
+			String message="Could not store need. Kindly retry";
+			request.setAttribute("msg", message);
+		}
 		getServletContext().getRequestDispatcher("investor.jsp?name="+name+"&CId="+CId).forward(request, response);
 	}
 

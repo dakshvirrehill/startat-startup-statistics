@@ -32,7 +32,11 @@ public class ChangeStatus extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession();
 		String username=(String)session.getAttribute("username");
-		DBOperations.changeStatus(username);
+		boolean a=DBOperations.changeStatus(username);
+		if(a) {
+			String message="Couldn't Open requested page, Kindly retry.";
+			request.setAttribute("msg", message);
+		}
 		getServletContext().getRequestDispatcher("/profile.jsp").include(request, response);
 	}
 
