@@ -114,7 +114,28 @@ else {
 <h2 align="center">Competitive Intelligence</h2> 
  </div>
  <div class="empty"></div>
- 
+ <h2>CompariScore</h2>
+ <div class="row">
+ 	<div class="col-sm-2 col-md-2 col-lg-2"></div>
+ 	<div class="col-sm-4 col-md-4 col-lg-4">
+ 		
+ 	</div>
+ 	<div class="col-sm-4 col-md-4 col-lg-4">
+ 		
+ 	</div>
+ 	<div class="col-sm-2 col-md-2 col-lg-2"></div>
+ </div>
+ <div class="empty"></div>
+  <div class="row">
+ 	<div class="col-sm-2 col-md-2 col-lg-2"></div>
+ 	<div class="col-sm-4 col-md-4 col-lg-4">
+ 		
+ 	</div>
+ 	<div class="col-sm-4 col-md-4 col-lg-4">
+ 		
+ 	</div>
+ 	<div class="col-sm-2 col-md-2 col-lg-2"></div>
+ </div>
 <%
 }
 %>

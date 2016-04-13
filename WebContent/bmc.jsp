@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="model.Company" %>
+<%@ page import="model.BusinessModelData" %>
 <%@ page import="model.DBOperations" %>
 <%@ page import="java.util.Vector" %>
 <%@ page import="java.util.Iterator" %>
@@ -66,7 +67,6 @@ border: medium solid;
 	</ol>
 </div>
 <div class="empty"></div>
-
 <div class="container-fluid">
 <%
 if(request.getParameter("name")==null)
@@ -111,88 +111,310 @@ if(request.getParameter("name")==null)
 		}
 }
 else {
-	Company c=DBOperations.getCompanyDetails(Integer.parseInt(request.getParameter("name")));
+	String cid=request.getParameter("name");
+	Company c=DBOperations.getCompanyDetails(Integer.parseInt(cid));
 %>
 <div class="jumbotron">
  <div align="right"><img src="<%=c.getLogo_path()%>"></div><h1><%=c.getName() %></h1><h3><a href="<%=c.getWebsite() %>"><%=c.getWebsite()%></a></h3><h3><a href="mailto:<%=c.getEmail() %>"><%=c.getEmail()%></a></h3>
 <h2 align="center">Business Model Creation</h2> 
  </div>
  <div class="empty"></div>
+ <% if(DBOperations.checkBmVsCompanyId(Integer.parseInt(cid))) {
+	 Vector<String> bmname=DBOperations.getBMName(Integer.parseInt(cid));
+	 Iterator i=bmname.iterator();
+	 while(i.hasNext()) {
+%>
+&nbsp;&nbsp;&nbsp;<a href="bmc.jsp?name=<%=cid %>&bmname=<%=i.next() %>"><%=i.next() %></a>
+<%		 
+	 }	 
+ }
+ %>
+ <form action="BMC" method="post" role="form" class="form-horizontal">
+	<div class="form-group">
+		<label for="bmname" class="control-label">New Business Model:</label>
+		<input type="text" id="bmname" name="bmname" class="form-control" placeholder="Type business model name">
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary">Add new Business Model</button>
+	</div>
+</form>
+<% if(request.getParameter("bmname")!=null) {
+	String bmname=request.getParameter("bmname");
+	Vector<BusinessModelData> bmd=DBOperations.getBMData(Integer.parseInt(cid), bmname);
+	BusinessModelData b=new BusinessModelData();
+	Iterator i=bmd.iterator();
+	String keyp="",keya="",keyr="",valp="",cusr="",chan="",cuss="",coss="",revs="";
+	while(i.hasNext()) {
+		b=(BusinessModelData)i.next();
+		switch(b.getBMTag()) {
+			case "Key Partners":keyp=b.getBMData();
+								break;
+			case "Key Activities":keya=b.getBMData();
+								  break;
+			case "Key Resources":keyr=b.getBMData();
+								break;
+			case "Value Propositions":valp=b.getBMData();
+									 break;
+			case "Channels":chan=b.getBMData();
+							break;
+			case "Customer Segments":cuss=b.getBMData();
+									break;
+			case "Customer Relationships":cusr=b.getBMData();
+										break;
+			case "Cost Structure":coss=b.getBMData();
+								 break;
+			case "Revenue Streams":revs=b.getBMData();
+								   break;
+		}
+	}
+%>
 <div class="row"> 
  <div class="col-sm-1 col-md-1 col-lg-1"></div>
  <div class="col-sm-2 col-md-2 col-lg-2 bord">
- <a href="#kp" id="keyp" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the eighth position among others"><div class="row"><h2>Key Partners</h2></div>
+ <a href="#kp" id="keyp" data-toggle="tooltip" title="Click here to fill this segment or change current values. By convention, it is filled at the eighth position among others"><div class="row"><h2>Key Partners</h2></div>
  	<div class="empty"></div>
  	<div class="empty"></div>
+<%if(keyp.equals("")) {%>
  	<div class="row">What partnerships are necessary for survival?</div>
  	<div class="empty"></div>
  	<div class="empty"></div>
  	<div class="empty"></div>
+ <%}else { %>
+ 	<div class="row">
+ <%String k[]=keyp.split(";");
+ int index=0;
+ for(index=0;index<k.length;index++) {
+	 if(index%3==0) {
+	 %>
+	 </div><div class="row">
+	 <%
+	 }
+	 %>
+	<div class="col-sm-4 col-md-4 col-lg-4"><%=k[index] %></div> 	 
+	 <%
+ }
+ %>
+ </div>
+ <%} %>
  	<div class="empty"></div>
- 	<div class="empty"></div></a>
+ 	<div class="empty"></div>
+ </a>
  </div>
  <div class="col-sm-2 col-md-2 col-lg-2 bord">
- 	<a href="#ka" id="keya"  data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the seventh position among others"><div class="row"><h2>Key Activities</h2></div>
+ 	<a href="#ka" id="keya"  data-toggle="tooltip" title="Click here to fill this segment or change current values. By convention, it is filled at the seventh position among others"><div class="row"><h2>Key Activities</h2></div>
  	<div class="empty"></div>
+ <% if(keya.equals("")) {%>	
  	<div style="padding-top:17px"></div>
  	<div class="row">What are the activities that are essential to your brand?</div>
- 	<div class="empty"></div></a><a href="#kr" id="keyr" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the sixth position among others">
- 	<div class="row"><h2>Key Resources</h2></div>
+ <%}else { %>
+ 	<div class="row">
+ <%String k[]=keya.split(";");
+ int index=0;
+ for(index=0;index<k.length;index++) {
+	 if(index%3==0) {
+	 %>
+	 </div><div class="row">
+	 <%
+	 }
+	 %>
+	<div class="col-sm-4 col-md-4 col-lg-4"><%=k[index] %></div> 	 
+	 <%
+ }
+ %>
+ </div>
+ <%} %>
  	<div class="empty"></div>
+ </a>
+ <a href="#kr" id="keyr" data-toggle="tooltip" title="Click here to fill this segment or change current values. By convention, it is filled at the sixth position among others"><div class="row"><h2>Key Resources</h2></div>
+ 	<div class="empty"></div>
+<% if(keyr.equals("")) {%>
  	<div class="row">What are the resources that are essential to your brand?</div>
  	<div class="empty"></div>
+<%}else { %>
+ 	<div class="row">
+ <%String k[]=keyr.split(";");
+ int index=0;
+ for(index=0;index<k.length;index++) {
+	 if(index%3==0) {
+	 %>
+	 </div><div class="row">
+	 <%
+	 }
+	 %>
+	<div class="col-sm-4 col-md-4 col-lg-4"><%=k[index] %></div> 	 
+	 <%
+ }
+ %>
+ </div>
+ <%} %>
  	<div class="empty"></div>
- 	<div style="padding-top:20px"></div></a>
+ 	<div style="padding-top:20px"></div>
+ </a>
  </div>
  <div class="col-sm-2 col-md-2 col-lg-2 bord">
- 	<a href="#vp" id="valuep" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the second position among others"><div class="row"><h2>Value Propositions</h2></div>
+ 	<a href="#vp" id="valuep" data-toggle="tooltip" title="Click here to fill this segment or change current values. By convention, it is filled at the second position among others"><div class="row"><h2>Value Propositions</h2></div>
  	<div class="empty"></div>
  	<div class="empty"></div>
+<% if(valp.equals("")) {%>
  	<div class="row">What makes you different and unique?</div>
  	<div class="empty"></div>
  	<div class="empty"></div>
+<%}else { %>
+ 	<div class="row">
+ <%String k[]=valp.split(";");
+ int index=0;
+ for(index=0;index<k.length;index++) {
+	 if(index%3==0) {
+	 %>
+	 </div><div class="row">
+	 <%
+	 }
+	 %>
+	<div class="col-sm-4 col-md-4 col-lg-4"><%=k[index] %></div> 	 
+	 <%
+ }
+ %>
+ </div>
+ <%} %>
  	<div class="empty"></div>
     <div class="empty"></div>
-    <div style="padding-top:37px"></div></a>
+    <div style="padding-top:37px"></div>
+</a>
 </div>
  <div class="col-sm-2 col-md-2 col-lg-2 bord">
- 	<a href="#cr" id="customerr" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the forth position among others"><div class="row"><h2>Customer Relationships</h2></div>
+ 	<a href="#cr" id="customerr" data-toggle="tooltip" title="Click here to fill this segment or change current values. By convention, it is filled at the forth position among others"><div class="row"><h2>Customer Relationships</h2></div>	
  	<div class="empty"></div>
+ <%if(cusr.equals("")) {%>	
  	<div style="padding-top:4px"></div>
  	<div class="row">What are you doing to maintain customer relationships?</div>
- 	<div class="empty"></div></a><a href="#c" id="channels" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the third position among others"> 
- 	<div class="row"><h2>Channels</h2></div>
+ <%}else { %>
+ 	<div class="row">
+ <%String k[]=cusr.split(";");
+ int index=0;
+ for(index=0;index<k.length;index++) {
+	 if(index%3==0) {
+	 %>
+	 </div><div class="row">
+	 <%
+	 }
+	 %>
+	<div class="col-sm-4 col-md-4 col-lg-4"><%=k[index] %></div> 	 
+	 <%
+ }
+ %>
+ </div>
+ <%} %>
  	<div class="empty"></div>
+ </a>
+ <a href="#c" id="channels" data-toggle="tooltip" title="Click here to fill this segment or change current values. By convention, it is filled at the third position among others"> <div class="row"><h2>Channels</h2></div>
+
+ 	<div class="empty"></div>
+ <%if(chan.equals("")) {%>
  	<div class="row">What are your distribution and other channels?</div>
  	<div class="empty"></div>
- 	<div class="empty"></div></a>
+ <%}else { %>
+ 	<div class="row">
+ <%String k[]=chan.split(";");
+ int index=0;
+ for(index=0;index<k.length;index++) {
+	 if(index%3==0) {
+	 %>
+	 </div><div class="row">
+	 <%
+	 }
+	 %>
+	<div class="col-sm-4 col-md-4 col-lg-4"><%=k[index] %></div> 	 
+	 <%
+ }
+ %>
+ </div>
+ <%} %>
+ 	<div class="empty"></div>
+ </a>
  </div>
  <div class="col-sm-2 col-md-2 col-lg-2 bord">
-  	<a href="#cs" id="customers" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the first position among others"><div class="row"><h2>Customer Segments</h2></div>
+  	<a href="#cs" id="customers" data-toggle="tooltip" title="Click here to fill this segment or change current values. By convention, it is filled at the first position among others"><div class="row"><h2>Customer Segments</h2></div>
  	<div class="empty"></div>
  	<div class="empty"></div>
+ <%if(cuss.equals("")) {%>
  	<div class="row">What is your Target Audience?</div>
  	<div class="empty"></div>
  	<div class="empty"></div>
+ <%}else { %>
+ 	<div class="row">
+ <%String k[]=cuss.split(";");
+ int index=0;
+ for(index=0;index<k.length;index++) {
+	 if(index%3==0) {
+	 %>
+	 </div><div class="row">
+	 <%
+	 }
+	 %>
+	<div class="col-sm-4 col-md-4 col-lg-4"><%=k[index] %></div> 	 
+	 <%
+ }
+ %>
+ </div>
+ <%} %>
  	<div class="empty"></div>
  	<div class="empty"></div>
- 	<div style="padding-top:57px"></div></a>
+ 	<div style="padding-top:57px"></div>
+ </a>
  </div>
  <div class="col-sm-1 col-md-1 col-lg-1"></div>
 </div>
 <div class="row">
 	<div class="col-sm-1 col-md-1 col-lg-1"></div>
 	<div class="col-sm-5 col-md-5 col-lg-5 bord">
-		<a href="#cos" id="costs" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the nineth position among others"><div class="row"><h2>Cost Structure</h2></div>
+		<a href="#cos" id="costs" data-toggle="tooltip" title="Click here to fill this segment or change current values. By convention, it is filled at the nineth position among others"><div class="row"><h2>Cost Structure</h2></div>
 		<div class="empty"></div>
+<% if(coss.equals("")) {%>		
 		<div class="row">Your expenditure details</div>
-		<div class="empty"></div></a>
+<%}else { %>
+ 	<div class="row">
+ <%String k[]=coss.split(";");
+ int index=0;
+ for(index=0;index<k.length;index++) {
+	 if(index%3==0) {
+	 %>
+	 </div><div class="row">
+	 <%
+	 }
+	 %>
+	<div class="col-sm-4 col-md-4 col-lg-4"><%=k[index] %></div> 	 
+	 <%
+ }
+ %>
+ </div>
+ <%} %>
+		<div class="empty"></div>
+	</a>
 	</div>
 	<div class="col-sm-5 col-md-5 col-lg-5 bord">
-		<a href="#rs" id="revenues" data-toggle="tooltip" title="Click here to fill this segment. By convention, it is filled at the fifth position among others"><div class="row"><h2>Revenue Streams</h2></div>
+		<a href="#rs" id="revenues" data-toggle="tooltip" title="Click here to fill this segment or change current values. By convention, it is filled at the fifth position among others"><div class="row"><h2>Revenue Streams</h2></div>
 		<div class="empty"></div>
+<%if(revs.equals("")) {%>
 		<div class="row">Your benefits/earning details</div>
-		<div class="empty"></div></a>		
+<%}else { %>
+ 	<div class="row">
+ <%String k[]=revs.split(";");
+ int index=0;
+ for(index=0;index<k.length;index++) {
+	 if(index%3==0) {
+	 %>
+	 </div><div class="row">
+	 <%
+	 }
+	 %>
+	<div class="col-sm-4 col-md-4 col-lg-4"><%=k[index] %></div> 	 
+	 <%
+ }
+ %>
+ </div>
+ <%} %>
+		<div class="empty"></div>
+	</a>		
 	</div>
 	<div class="col-sm-1 col-md-1 col-lg-1"></div>
 </div>
@@ -204,10 +426,9 @@ else {
 	<form action="BMC" method="post" role="form" class="form-horizontal">
 		<div class="form-group">
 			<label for="CustomerSegments" class="control-label">Customer Segments:</label>
-			<textarea rows="4" id="CustomerSegments" class="form-control" name="CustomerSegments" placeholder="Enter ';' seperated values"></textarea>
+			<textarea rows="4" id="CustomerSegments" class="form-control" name="CustomerSegments" placeholder="Enter ';' seperated values"><%if(!cuss.equals("")) {%><%=cuss %><%} %></textarea>
 		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary" name="csmseg">Update</button>
+		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="csmseg">Update</button>
 		</div>
 	</form>
 </div>
@@ -219,10 +440,9 @@ else {
 	<form action="BMC" method="post" role="form" class="form-horizontal">
 		<div class="form-group">
 			<label for="ValuePropositions" class="control-label">ValuePropositions:</label>
-			<textarea rows="4" id="ValuePropositions" class="form-control" name="ValuePropostions" placeholder="Enter ';' seperated values"></textarea>
+			<textarea rows="4" id="ValuePropositions" class="form-control" name="ValuePropostions" placeholder="Enter ';' seperated values"><%if(!valp.equals("")) {%><%=valp %><%} %></textarea>
 		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary" name="valprop">Update</button>
+		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="valprop">Update</button>
 		</div>
 	</form>	
 </div>
@@ -234,10 +454,9 @@ else {
 	<form action="BMC" method="post" role="form" class="form-horizontal">
 		<div class="form-group">
 			<label for="ChannelsVal" class="control-label">Channels:</label>
-			<textarea rows="4" id="ChannelsVal" class="form-control" name="ChannelsVal" placeholder="Enter ';' seperated values"></textarea>
+			<textarea rows="4" id="ChannelsVal" class="form-control" name="ChannelsVal" placeholder="Enter ';' seperated values"><%if(!chan.equals("")) {%><%=chan %><%} %></textarea>
 		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary" name="chanval">Update</button>
+		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="chanval">Update</button>
 		</div>
 	</form>	
 </div>
@@ -249,10 +468,9 @@ else {
 	<form action="BMC" method="post" role="form" class="form-horizontal">
 		<div class="form-group">
 			<label for="CustomerRelationships" class="control-label">Customer Relationships:</label>
-			<textarea rows="4" id="CustomerRelationships" class="form-control" name="CustomerRelationships" placeholder="Enter ';' seperated values"></textarea>
+			<textarea rows="4" id="CustomerRelationships" class="form-control" name="CustomerRelationships" placeholder="Enter ';' seperated values"><%if(!cusr.equals("")) {%><%=cusr %><%} %></textarea>
 		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary" name="custrel">Update</button>
+		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="custrel">Update</button>
 		</div>
 	</form>	
 </div>
@@ -264,10 +482,9 @@ else {
 	<form action="BMC" method="post" role="form" class="form-horizontal">
 		<div class="form-group">
 			<label for="RevenueStreams" class="control-label">Revenue Streams:</label>
-			<textarea rows="4" id="RevenueStreams" class="form-control" name="RevenueStreams" placeholder="Enter ';' seperated values"></textarea>
+			<textarea rows="4" id="RevenueStreams" class="form-control" name="RevenueStreams" placeholder="Enter ';' seperated values"><%if(!revs.equals("")) {%><%=revs %><%} %></textarea>
 		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary" name="revstream">Update</button>
+		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="revstream">Update</button>
 		</div>
 	</form>	
 </div>
@@ -279,10 +496,9 @@ else {
 	<form action="BMC" method="post" role="form" class="form-horizontal">
 		<div class="form-group">
 			<label for="KeyResources" class="control-label">Key Resources:</label>
-			<textarea rows="4" id="KeyResources" class="form-control" name="KeyResources" placeholder="Enter ';' seperated values"></textarea>
+			<textarea rows="4" id="KeyResources" class="form-control" name="KeyResources" placeholder="Enter ';' seperated values"><%if(!keyr.equals("")) {%><%=keyr %><%} %></textarea>
 		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary" name="keyres">Update</button>
+		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="keyres">Update</button>
 		</div>
 	</form>	
 </div>
@@ -294,10 +510,9 @@ else {
 	<form action="BMC" method="post" role="form" class="form-horizontal">
 		<div class="form-group">
 			<label for="KeyActivities" class="control-label">Key Activities:</label>
-			<textarea rows="4" id="KeyActivities" class="form-control" name="KeyActivities" placeholder="Enter ';' seperated values"></textarea>
+			<textarea rows="4" id="KeyActivities" class="form-control" name="KeyActivities" placeholder="Enter ';' seperated values"><%if(!keya.equals("")) {%><%=keya %><%} %></textarea>
 		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary" name="keyact">Update</button>
+		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="keyact">Update</button>
 		</div>
 	</form>	
 </div>
@@ -309,10 +524,9 @@ else {
 	<form action="BMC" method="post" role="form" class="form-horizontal">
 		<div class="form-group">
 			<label for="KeyPartners" class="control-label">Key Partners:</label>
-			<textarea rows="4" id="KeyPartners" class="form-control" name="KeyPartners" placeholder="Enter ';' seperated values"></textarea>
+			<textarea rows="4" id="KeyPartners" class="form-control" name="KeyPartners" placeholder="Enter ';' seperated values"><%if(!keyp.equals("")) {%><%=keyp %><%} %></textarea>
 		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary" name="keypart">Update</button>
+		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="keypart">Update</button>
 		</div>
 	</form>	
 </div>
@@ -324,10 +538,9 @@ else {
 	<form action="BMC" method="post" role="form" class="form-horizontal">
 		<div class="form-group">
 			<label for="CostStructure" class="control-label">Cost Structure:</label>
-			<textarea rows="4" id="CostStructure" class="form-control" name="CostStructure" placeholder="Enter ';' seperated values"></textarea>
+			<textarea rows="4" id="CostStructure" class="form-control" name="CostStructure" placeholder="Enter ';' seperated values"><%if(!coss.equals("")) {%><%=coss %><%} %></textarea>
 		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary" name="coststruct">Update</button>
+		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="coststruct">Update</button>
 		</div>
 	</form>
 </div>
@@ -335,15 +548,18 @@ else {
 <div class="empty"></div>
 <%
 }
+}
 %>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>   
+<% if(request.getParameter("name")!=null) {%>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
+<% if(request.getParameter("bmname")!=null) {%>
 	$('#keyp').on('click',function(event){
 		// Prevent default anchor click behavior
 	    event.preventDefault();
@@ -470,7 +686,9 @@ $(document).ready(function(){
 	      window.location.hash = hash;
 	    });
 	});
+<% } %>
 });
 </script>
+<% } %>
 </body>
 </html>

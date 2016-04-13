@@ -342,4 +342,88 @@ public class DBOperations {
 		}
 		return false;
 	}
+	public static boolean checkBmVsCompanyId(int CId) {
+		String sql="SELECT * FROM BusinessModelData WHERE CompanyId="+CId;
+		ResultSet rs=selectQuery(sql);
+		try {
+			if(rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public static Vector<String> getBMName(int CId) {
+		Vector<String> bmname=new Vector<String>();
+		String sql="SELECT BMName FROM BusinessModelData WHERE CompanyId="+CId;
+		ResultSet rs=selectQuery(sql);
+		try {
+			while(rs.next()) {
+				bmname.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bmname;
+	}
+	public static Vector<BusinessModelData> getBMData(int cid,String BMname) {
+		Vector<BusinessModelData> bmd=new Vector<BusinessModelData>();
+		String sql="SELECT * FROM BusinessModelData WHERE CompanyId="+cid+" AND BMName='"+BMname+"'";
+		ResultSet rs=selectQuery(sql);
+		BusinessModelData b=new BusinessModelData();
+		try {
+			while(rs.next()) {
+				b.setBMName(BMname);
+				b.setCompanyId(cid);
+				b.setBMTag(rs.getString(3));
+				b.setBMData(rs.getString(4));
+				bmd.add(b);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bmd;
+	}
+	public static boolean setScore(int score[], int cid) {
+		String sql="SELECT * FROM CompariScore WHERE CompanyId="+cid;
+		ResultSet rs=selectQuery(sql);
+		try {
+			if(rs.next()) {
+				sql="UPDATE CompariScore SET PopularityScore="+score[0]+" AND CustomerRelationshipScore="+score[1]+" AND CustomerSegmentScore="+score[2]+" AND ValuePropositionScore="+score[3]+" WHERE CompanyId="+cid;
+			}
+			else {
+				sql="INSERT INTO CompariScore VALUES("+cid+","+score[0]+","+score[1]+","+score[2]+","+score[3]+")";
+			}
+			int i=insertOrUpdate(sql);
+			if(i>0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public static CompariScore getScore(int cid) {
+		CompariScore score=new CompariScore();
+		String sql="SELECT * FROM CompariScore WHERE CompanyId="+cid;
+		ResultSet rs=selectQuery(sql);
+		try {
+			if(rs.next()) {
+				score.setCompanyId(rs.getInt(2));
+				score.setPopularityScore(rs.getInt(3));
+				score.setCustomerRelationshipScore(rs.getInt(4));
+				score.setCustomerSegmentScore(rs.getInt(5));
+				score.setValuePropositionsScore(rs.getInt(5));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return score;
+	}
 }
