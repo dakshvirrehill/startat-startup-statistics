@@ -313,16 +313,16 @@ public class DBOperations {
 		}
 		return false;
 	}
-	public static boolean addBMData(String tag,String val,int CId) {
-		String sql="INSERT INTO BusinessModelData Values("+CId+",'"+tag+"','"+val+"')";
+	public static boolean addBMData(String tag,String val,int CId,String bmname) {
+		String sql="INSERT INTO BusinessModelData Values("+CId+",'"+tag+"','"+val+"','"+bmname+"')";
 		int i=insertOrUpdate(sql);
 		if(i>0) {
 			return true;
 		}
 		return false;
 	}
-	public static boolean checkBMData(String tag, int CId) {
-		String sql="SELECT BMData FROM BusinessModelData WHERE BMTag='"+tag+"' AND CompanyId="+CId;
+	public static boolean checkBMData(String tag, int CId,String bmname) {
+		String sql="SELECT BMData FROM BusinessModelData WHERE BMTag='"+tag+"' AND BMName='"+bmname+"' AND CompanyId="+CId;
 		ResultSet rs=selectQuery(sql);
 		try {
 			if(rs.next()) {
@@ -334,8 +334,8 @@ public class DBOperations {
 		}
 		return false;
 	}
-	public static boolean updateBMData(String tag, String val, int CId) {
-		String sql="UPDATE BusinessModelData SET BMData='"+val+"' WHERE BMTag='"+tag+"' AND CompanyId="+CId;
+	public static boolean updateBMData(String tag, String val, int CId, String bmname) {
+		String sql="UPDATE BusinessModelData SET BMData='"+val+"' WHERE BMTag='"+tag+"' BMName='"+bmname+"' AND CompanyId="+CId;
 		int i=insertOrUpdate(sql);
 		if(i>0) {
 			return true;
@@ -388,15 +388,15 @@ public class DBOperations {
 		}
 		return bmd;
 	}
-	public static boolean setScore(int score[], int cid) {
+	public static boolean setScore(int score[], int cid,String scoreval[]) {
 		String sql="SELECT * FROM CompariScore WHERE CompanyId="+cid;
 		ResultSet rs=selectQuery(sql);
 		try {
 			if(rs.next()) {
-				sql="UPDATE CompariScore SET PopularityScore="+score[0]+" AND CustomerRelationshipScore="+score[1]+" AND CustomerSegmentScore="+score[2]+" AND ValuePropositionScore="+score[3]+" WHERE CompanyId="+cid;
+				sql="UPDATE CompariScore SET PopularityScore="+score[0]+" AND CustomerRelationshipScore="+score[1]+" AND CustomerSegmentScore="+score[2]+" AND ValuePropositionScore="+score[3]+" AND CompareWith='"+scoreval[0]+"' AND Popularity='"+scoreval[1]+"' AND CustomerRelationship='"+scoreval[2]+"' AND CustomerSegment='"+scoreval[3]+"' AND ValueProposition='"+scoreval[4]+"' WHERE CompanyId="+cid;
 			}
 			else {
-				sql="INSERT INTO CompariScore VALUES("+cid+","+score[0]+","+score[1]+","+score[2]+","+score[3]+")";
+				sql="INSERT INTO CompariScore VALUES("+cid+","+score[0]+","+score[1]+","+score[2]+","+score[3]+",'"+scoreval[0]+"','"+scoreval[1]+"','"+scoreval[2]+"','"+scoreval[3]+"','"+scoreval[4]+"')";
 			}
 			int i=insertOrUpdate(sql);
 			if(i>0) {
@@ -419,11 +419,92 @@ public class DBOperations {
 				score.setCustomerRelationshipScore(rs.getInt(4));
 				score.setCustomerSegmentScore(rs.getInt(5));
 				score.setValuePropositionsScore(rs.getInt(5));
+				score.setComparisionWith(rs.getString(6));
+				score.setPopularity(rs.getString(7));
+				score.setCustomerRelationship(rs.getString(8));
+				score.setCustomerSegment(rs.getString(9));
+				score.setValueProposition(rs.getString(10));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return score;
+	}
+	public static boolean isScoreSet(int cid) {
+		String sql="SELECT * FROM CompariScore WHERE CompanyId="+cid;
+		ResultSet rs=selectQuery(sql);
+		try {
+			return rs.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public static boolean addFinancials(Financials fin) {
+		String sql="INSERT INTO Financials VALUES("+fin.getCompanyId()+",'"+fin.getFinancial_Name()+"','"+fin.getFinancial_Type()+"',"+fin.getFinancialAmount()+",'"+fin.getDate()+"',"+fin.getSales()+","+fin.getMonth()+","+fin.getYear()+")";
+		if(insertOrUpdate(sql)>0) {
+			return true;
+		}
+		return false;
+	}
+	public static Vector<Financials> getFinancials(int cid) {
+		Vector<Financials> finance=new Vector<Financials>();
+		String sql="SELECT * FROM Financials WHERE CompanyId="+cid;
+		ResultSet rs=selectQuery(sql);
+		Financials fin=new Financials();
+		try {
+			while(rs.next()) {
+				fin.setFinancialId(rs.getInt(1));
+				fin.setCompanyId(rs.getInt(2));
+				fin.setFinancial_Name(rs.getString(3));
+				fin.setFinancial_Type(rs.getString(4));
+				fin.setFinancialAmount(rs.getInt(5));
+				fin.setDate(rs.getString(6));
+				fin.setSales(rs.getInt(7));
+				fin.setMonth(rs.getInt(8));
+				fin.setYear(rs.getInt(9));
+				finance.add(fin);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return finance;
+	}
+	public static void updateRevenue(int cid, int revenue) {
+		String sql="UPDATE Company SET TotalRevenue="+revenue+" WHERE CompanyId="+cid;
+		int i=insertOrUpdate(sql);
+	}
+	public static void updateCost(int cid, int cost) {
+		String sql="UPDATE Company SET TotalCost="+cost+" WHERE CompanyId="+cid;
+		int i=insertOrUpdate(sql);		
+	}
+	public static int getRevenue(int cid) {
+		String sql="SELECT TotalRevenue FROM Company WHERE CompanyId="+cid;
+		ResultSet rs=selectQuery(sql);
+		try {
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	public static int getCost(int cid) {
+		String sql="SELECT TotalCost FROM Company WHERE CompanyId="+cid;
+		ResultSet rs=selectQuery(sql);
+		try {
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }

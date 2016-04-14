@@ -135,7 +135,7 @@ else {
 		<input type="text" id="bmname" name="bmname" class="form-control" placeholder="Type business model name">
 	</div>
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Add new Business Model</button>
+		<button type="submit" class="btn btn-primary" name="BMN">Add new Business Model</button>
 	</div>
 </form>
 <% if(request.getParameter("bmname")!=null) {
@@ -428,7 +428,7 @@ else {
 			<label for="CustomerSegments" class="control-label">Customer Segments:</label>
 			<textarea rows="4" id="CustomerSegments" class="form-control" name="CustomerSegments" placeholder="Enter ';' seperated values"><%if(!cuss.equals("")) {%><%=cuss %><%} %></textarea>
 		</div>
-		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="csmseg">Update</button>
+		<div class="form-group"><input type="text" name="id" value="cs" hidden><input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="csmseg">Update</button>
 		</div>
 	</form>
 </div>
@@ -442,7 +442,7 @@ else {
 			<label for="ValuePropositions" class="control-label">ValuePropositions:</label>
 			<textarea rows="4" id="ValuePropositions" class="form-control" name="ValuePropostions" placeholder="Enter ';' seperated values"><%if(!valp.equals("")) {%><%=valp %><%} %></textarea>
 		</div>
-		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="valprop">Update</button>
+		<div class="form-group"><input type="text" name="id" value="vp" hidden><input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="valprop">Update</button>
 		</div>
 	</form>	
 </div>
@@ -456,7 +456,7 @@ else {
 			<label for="ChannelsVal" class="control-label">Channels:</label>
 			<textarea rows="4" id="ChannelsVal" class="form-control" name="ChannelsVal" placeholder="Enter ';' seperated values"><%if(!chan.equals("")) {%><%=chan %><%} %></textarea>
 		</div>
-		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="chanval">Update</button>
+		<div class="form-group"><input type="text" name="id" value="c" hidden><input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="chanval">Update</button>
 		</div>
 	</form>	
 </div>
@@ -470,7 +470,7 @@ else {
 			<label for="CustomerRelationships" class="control-label">Customer Relationships:</label>
 			<textarea rows="4" id="CustomerRelationships" class="form-control" name="CustomerRelationships" placeholder="Enter ';' seperated values"><%if(!cusr.equals("")) {%><%=cusr %><%} %></textarea>
 		</div>
-		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="custrel">Update</button>
+		<div class="form-group"><input type="text" name="id" value="cr" hidden><input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="custrel">Update</button>
 		</div>
 	</form>	
 </div>
@@ -484,7 +484,7 @@ else {
 			<label for="RevenueStreams" class="control-label">Revenue Streams:</label>
 			<textarea rows="4" id="RevenueStreams" class="form-control" name="RevenueStreams" placeholder="Enter ';' seperated values"><%if(!revs.equals("")) {%><%=revs %><%} %></textarea>
 		</div>
-		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="revstream">Update</button>
+		<div class="form-group"><input type="text" name="id" value="rs" hidden><input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="revstream">Update</button>
 		</div>
 	</form>	
 </div>
@@ -498,7 +498,7 @@ else {
 			<label for="KeyResources" class="control-label">Key Resources:</label>
 			<textarea rows="4" id="KeyResources" class="form-control" name="KeyResources" placeholder="Enter ';' seperated values"><%if(!keyr.equals("")) {%><%=keyr %><%} %></textarea>
 		</div>
-		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="keyres">Update</button>
+		<div class="form-group"><input type="text" name="id" value="kr" hidden><input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="keyres">Update</button>
 		</div>
 	</form>	
 </div>
@@ -512,7 +512,7 @@ else {
 			<label for="KeyActivities" class="control-label">Key Activities:</label>
 			<textarea rows="4" id="KeyActivities" class="form-control" name="KeyActivities" placeholder="Enter ';' seperated values"><%if(!keya.equals("")) {%><%=keya %><%} %></textarea>
 		</div>
-		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="keyact">Update</button>
+		<div class="form-group"><input type="text" name="id" value="ka" hidden><input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="keyact">Update</button>
 		</div>
 	</form>	
 </div>
@@ -526,7 +526,7 @@ else {
 			<label for="KeyPartners" class="control-label">Key Partners:</label>
 			<textarea rows="4" id="KeyPartners" class="form-control" name="KeyPartners" placeholder="Enter ';' seperated values"><%if(!keyp.equals("")) {%><%=keyp %><%} %></textarea>
 		</div>
-		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="keypart">Update</button>
+		<div class="form-group"><input type="text" name="id" value="kp" hidden><input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="keypart">Update</button>
 		</div>
 	</form>	
 </div>
@@ -540,7 +540,7 @@ else {
 			<label for="CostStructure" class="control-label">Cost Structure:</label>
 			<textarea rows="4" id="CostStructure" class="form-control" name="CostStructure" placeholder="Enter ';' seperated values"><%if(!coss.equals("")) {%><%=coss %><%} %></textarea>
 		</div>
-		<div class="form-group">			<input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="coststruct">Update</button>
+		<div class="form-group"><input type="text" name="id" value="cos" hidden><input type="text" name="bmname" value="<%=bmname %>" hidden><input type="text" name="cid" value="<%=cid %>" hidden><button type="submit" class="btn btn-primary" name="coststruct">Update</button>
 		</div>
 	</form>
 </div>

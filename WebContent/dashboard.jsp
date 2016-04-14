@@ -55,7 +55,8 @@ padding-top:50px;
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-2 col-md-2 col-lg-2">
-			<a href="company.jsp" class="btn btn-primary">All Companies</a>
+			<div class="row"><a href="company.jsp" class="btn btn-primary">All Companies</a></div>
+			<div class="row"><a href="financials.jsp" class="btn btn-primary">Add Financials</a></div>
 		</div>
 		<a href="competitive.jsp"><div class="col-sm-2 col-md-2 col-lg-2">
 			<div class="row" align="center">

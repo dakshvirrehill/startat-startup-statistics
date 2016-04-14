@@ -31,6 +31,7 @@ public class BMC extends HttpServlet {
 		// TODO Auto-generated method stub
 		String tag="";
 		String data="";
+		String bmname=request.getParameter("bmn");
 		String id=request.getParameter("id");
 		int cid=Integer.parseInt(request.getParameter("CId"));
 		if(request.getParameter("csmseg")!=null) {
@@ -69,27 +70,30 @@ public class BMC extends HttpServlet {
 			tag="Cost Structure";
 			data=request.getParameter("CostStructure");
 		}
-		if(tag.equals("")||data.equals("")) {
-			response.sendRedirect("bmc.jsp?name="+cid);
+		if(request.getParameter("BMN")!=null) {
+			bmname=request.getParameter("bmname");
 		}
-		if(DBOperations.checkBMData(tag, cid)) {
-			if(DBOperations.updateBMData(tag, data, cid)) {
-				getServletContext().getRequestDispatcher("/bmc.jsp?name="+cid+"#"+id).include(request,response);
+		if(tag.equals("")&&data.equals("")) {
+			response.sendRedirect("bmc.jsp?name="+cid+"&bmname="+bmname);
+		}
+		if(DBOperations.checkBMData(tag, cid,bmname)) {
+			if(DBOperations.updateBMData(tag, data, cid,bmname)) {
+				getServletContext().getRequestDispatcher("/bmc.jsp?name="+cid+"&bmname="+bmname+"#"+id).include(request,response);
 			}
 			else {
 				String message="Try Again";
 				request.setAttribute("msg", message);
-				getServletContext().getRequestDispatcher("/bmc.jsp?name="+cid).include(request, response);
+				getServletContext().getRequestDispatcher("/bmc.jsp?name="+cid+"&bmname="+bmname).include(request, response);
 			}
 		}
 		else {
-			if(DBOperations.addBMData(tag, data, cid)) {
-				getServletContext().getRequestDispatcher("/bmc.jsp?name="+cid+"#"+id).include(request,response);				
+			if(DBOperations.addBMData(tag, data, cid,bmname)) {
+				getServletContext().getRequestDispatcher("/bmc.jsp?name="+cid+"&bmname="+bmname+"#"+id).include(request,response);				
 			}
 			else {
 				String message="Try Again";
 				request.setAttribute("msg", message);
-				getServletContext().getRequestDispatcher("/bmc.jsp?name="+cid).include(request, response);				
+				getServletContext().getRequestDispatcher("/bmc.jsp?name="+cid+"&bmname="+bmname).include(request, response);				
 			}
 		}
 	}
