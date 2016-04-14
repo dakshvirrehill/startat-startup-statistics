@@ -135,8 +135,8 @@ else {
 	else
 	{
 	Connections c=DBOperations.getPossibleConnections((String)request.getParameter("name"),need);
-	Vector<Investor> i=c.getInvestor();
-	Vector<Startup> s=c.getStartup();
+	Vector<Investor> inv=c.getInvestor();
+	Vector<Startup> stra=c.getStartup();
 	%>
  <div class="col-sm-6 col-md-6 col-lg-6">
  	<div class="row"><h2>Investors <small>you might be interested in</small></h2></div>
@@ -148,7 +148,7 @@ else {
  		<div class="col-sm-4 col-md-4 col-lg-4">Contact</div>
  	</div>
 <% 
-Iterator j=i.iterator();
+Iterator j=inv.iterator();
 if(!j.hasNext()) {
 %>
 <h3>None for now. Stay tuned... we update are list frequently</h3>
@@ -157,13 +157,13 @@ if(!j.hasNext()) {
 int count=0;
 while(j.hasNext()) {
 	count++;
-	Investor inv=(Investor)j.next();
+	Investor invs=(Investor)j.next();
 %>
 <div class="row">
 	<div class="col-sm-2 col-md-2 col-lg-2"><%=count %></div>
-	<div class="col-sm-3 col-md-3 col-lg 3"><%=inv.getName() %></div>
-	<div class="col-sm-3 col-md-3 col-lg-3"><%=inv.getMax_investment() %></div>
-	<div class="col-sm-4 col-md-4 col-lg-4"><a href="<%=inv.getWebsite() %>"><%=inv.getWebsite() %></a></div>
+	<div class="col-sm-3 col-md-3 col-lg 3"><%=invs.getName() %></div>
+	<div class="col-sm-3 col-md-3 col-lg-3"><%=invs.getMax_investment() %></div>
+	<div class="col-sm-4 col-md-4 col-lg-4"><a href="<%=invs.getWebsite() %>"><%=invs.getWebsite() %></a></div>
 </div>
 <%	
 }
@@ -180,8 +180,8 @@ while(j.hasNext()) {
  		<div class="col-sm-3 col-md-3 col-lg-3">Contact</div>
  	</div>
 <% 
-j=s.iterator();
-if(!j.hasNext())
+Iterator k=stra.iterator();
+if(!k.hasNext())
 {
 %>
 <h3>None for now. Stay tuned... we update are list frequently</h3>

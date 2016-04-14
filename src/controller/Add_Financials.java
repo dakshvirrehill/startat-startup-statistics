@@ -52,12 +52,12 @@ public class Add_Financials extends HttpServlet {
 		{
 			int cost=DBOperations.getCost(cid);
 			cost+=amount;
-			DBOperations.updateCost(cid, cost);
+			fin.setTotalCost(cost);
 		}
 		if(type.equals("revenue")) {
 			int revenue=DBOperations.getRevenue(cid);
 			revenue+=amount;
-			DBOperations.updateRevenue(cid, revenue);
+			fin.setTotalRev(revenue);
 		}
 		if(DBOperations.addFinancials(fin)) {
 			String message="Financial Added Successfully";

@@ -124,9 +124,9 @@ else {
 %>
 <div class="jumbotron">
  <div align="right"><img src="<%=c.getLogo_path()%>"></div><h1><%=c.getName() %></h1><h3><a href="<%=c.getWebsite() %>"><%=c.getWebsite()%></a></h3><h3><a href="mailto:<%=c.getEmail() %>"><%=c.getEmail()%></a></h3>
- <% if(DBOperations.isScoreSet(Integer.parseInt(cid))) {
+ <% if(!DBOperations.isScoreSet(c.getCId())) {
 %>
-<h2 align="center">Competitive Intelligence</h2>
+<h2 align="center">Competitive Intelligence</h2></div>
 <div class="empty"></div>
 <form class="form-horizontal" role="form" action="CompetitiveIntelligence" method="post">
 	<div class="form-group">

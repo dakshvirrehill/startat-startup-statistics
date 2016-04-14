@@ -1,7 +1,19 @@
 package model;
 
 public class Financials {
-	int FinancialId,CompanyId,FinancialAmount,Month,Year,sales;
+	int FinancialId,CompanyId,FinancialAmount,Month,Year,sales,TotalRev,TotalCost;
+	public int getTotalRev() {
+		return TotalRev;
+	}
+	public void setTotalRev(int totalRev) {
+		TotalRev = totalRev;
+	}
+	public int getTotalCost() {
+		return TotalCost;
+	}
+	public void setTotalCost(int totalCost) {
+		TotalCost = totalCost;
+	}
 	public int getSales() {
 		return sales;
 	}

@@ -124,10 +124,10 @@ opacity:0;
     	<div class="col-sm-4 col-md-4 col-lg-4"></div>
     	<div class="empty"></div>
     </div>
-  <a class="left carousel-control" href="#profile-detail-form" role="button" data-slide="prev">
+  <a id="abc" class="left carousel-control" href="#profile-detail-form" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left"></span>
   </a>
-  <a class="right carousel-control" href="#profile-detail-form" role="button" data-slide="next">
+  <a id="abcr" class="right carousel-control" href="#profile-detail-form" role="button" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right"></span>
   </a>
 </div>
@@ -230,6 +230,15 @@ $(document).ready(function() {
 	    label_default: "Upload Profile Picture", 
 	    label_selected: "Change Profile Picture",
 	    no_label: false 
+	  });
+	  $(document).keypress(function (e) {
+		  var key=e.which;
+		  if(key==37) {
+			  ('#abc').click();
+		  }
+		  else if(key==39) {
+			  $('#abcr').click();
+		  }
 	  });
 	});
 </script>

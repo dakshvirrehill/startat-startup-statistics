@@ -107,14 +107,27 @@ if(request.getParameter("name")==null)
 		}
 }
 else {
-	Company c=DBOperations.getCompanyDetails(Integer.parseInt(request.getParameter("name")));
+	String cid=request.getParameter("name");
+	Company c=DBOperations.getCompanyDetails(Integer.parseInt(cid));
 %>
 <div class="jumbotron">
  <div align="right"><img src="<%=c.getLogo_path()%>"></div><h1><%=c.getName() %></h1><h3><a href="<%=c.getWebsite() %>"><%=c.getWebsite()%></a></h3><h3><a href="mailto:<%=c.getEmail() %>"><%=c.getEmail()%></a></h3>
 <h2 align="center">Growth Prediction</h2> 
  </div>
  <div class="empty"></div>
- 
+ <form action="GrowthPrediction" role="form" class="form-horizontal" method="post">
+ 	<div class="form-group">
+ 		<label for="years" class="control-label">No. of Years:</label>
+ 		<input type="text" class="form-control" id="years" name="years" placeholder="Enter the number of years you want the prediction of including current year">
+ 	</div>
+ 	<div class="form-group">
+ 	<input type="text" name="cid" value="<%=cid %>" hidden>
+ 		<button type="submit" class="btn btn-primary">Submit</button>
+ 	</div>
+ </form>
+ <div class="empty"></div>
+ <div class="empty"></div> 
+ <img id="growthgraph" src="<%=cid %>_<%=session.getAttribute("username") %>_growth.jpg">
 <%
 }
 %>

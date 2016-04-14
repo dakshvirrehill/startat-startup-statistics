@@ -121,10 +121,12 @@ else {
  <div class="empty"></div>
  <% if(DBOperations.checkBmVsCompanyId(Integer.parseInt(cid))) {
 	 Vector<String> bmname=DBOperations.getBMName(Integer.parseInt(cid));
-	 Iterator i=bmname.iterator();
-	 while(i.hasNext()) {
+	 Iterator ib=bmname.iterator();
+	 String bmn="";
+	 while(ib.hasNext()) {
+		 bmn=(String)ib.next();
 %>
-&nbsp;&nbsp;&nbsp;<a href="bmc.jsp?name=<%=cid %>&bmname=<%=i.next() %>"><%=i.next() %></a>
+&nbsp;&nbsp;&nbsp;<a href="bmc.jsp?name=<%=cid %>&bmname=<%=bmn %>"><%=bmn %></a>
 <%		 
 	 }	 
  }
@@ -146,26 +148,15 @@ else {
 	String keyp="",keya="",keyr="",valp="",cusr="",chan="",cuss="",coss="",revs="";
 	while(i.hasNext()) {
 		b=(BusinessModelData)i.next();
-		switch(b.getBMTag()) {
-			case "Key Partners":keyp=b.getBMData();
-								break;
-			case "Key Activities":keya=b.getBMData();
-								  break;
-			case "Key Resources":keyr=b.getBMData();
-								break;
-			case "Value Propositions":valp=b.getBMData();
-									 break;
-			case "Channels":chan=b.getBMData();
-							break;
-			case "Customer Segments":cuss=b.getBMData();
-									break;
-			case "Customer Relationships":cusr=b.getBMData();
-										break;
-			case "Cost Structure":coss=b.getBMData();
-								 break;
-			case "Revenue Streams":revs=b.getBMData();
-								   break;
-		}
+		if(b.getBMTag().equals("Key Partners")){keyp=b.getBMData();}
+		else if(b.getBMTag().equals("Key Activities")){keya=b.getBMData();}
+		else if(b.getBMTag().equals("Key Resources")){keyr=b.getBMData();}
+		else if(b.getBMTag().equals("Value Propositions")){valp=b.getBMData();}
+		else if(b.getBMTag().equals("Channels")){chan=b.getBMData();}
+		else if(b.getBMTag().equals("Customer Segments")){cuss=b.getBMData();}
+		else if(b.getBMTag().equals("Customer Relationships")){cusr=b.getBMData();}
+		else if(b.getBMTag().equals("Cost Structure")){coss=b.getBMData();}
+		else if(b.getBMTag().equals("Revenue Streams")){revs=b.getBMData();}
 	}
 %>
 <div class="row"> 

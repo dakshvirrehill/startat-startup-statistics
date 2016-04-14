@@ -28,6 +28,9 @@ padding-bottom:70px;
 clear:both;
 padding-top:50px;
 }
+ .bigicon{
+ font-size:32px;
+ }
 </style>
 </head>
 <body>
@@ -60,7 +63,7 @@ padding-top:50px;
 		</div>
 		<a href="competitive.jsp"><div class="col-sm-2 col-md-2 col-lg-2">
 			<div class="row" align="center">
-				<img src="images/startat-logo-navbar.png" class="img-circle">
+<div class="bigicon"><i class="fa fa-binoculars fa-5x" aria-hidden="true"></i></div>
 			</div>
 			<div class="row">
 				<h3 align="center">
@@ -75,7 +78,7 @@ padding-top:50px;
 		<div class="col-sm-1 col-md-1 col-lg-1"></div>
 		<a href="breakeven.jsp"><div class="col-sm-2 col-md-2 col-lg-2">
 			<div class="row" align="center">
-				<img src="images/startat-logo-navbar.png" class="img-circle">
+<div class="bigicon"><i class="fa fa-line-chart fa-5x" aria-hidden="true"></i></div>
 			</div>
 			<div class="row">
 				<h3 align="center">
@@ -90,7 +93,7 @@ padding-top:50px;
 		<div class="col-sm-1 col-md-1 col-lg-1"></div>
 		<a href="investor.jsp"><div class="col-sm-2 col-md-2 col-lg-2">
 			<div class="row" align="center">
-				<img src="images/startat-logo-navbar.png" class="img-circle">
+<div class="bigicon"><i class="fa fa-paypal fa-5x" aria-hidden="true"></i></div>
 			</div>
 			<div class="row">
 				<h3 align="center">
@@ -109,7 +112,7 @@ padding-top:50px;
 		<div class="col-sm-2 col-md-2 col-lg-2"></div>
 		<a href="bmc.jsp"><div class="col-sm-2 col-md-2 col-lg-2">
 			<div class="row" align="center">
-				<img src="images/startat-logo-navbar.png" class="img-circle">
+<div class="bigicon"><i class="fa fa-heartbeat fa-5x" aria-hidden="true"></i></div>
 			</div>
 			<div class="row">
 				<h3 align="center">
@@ -124,7 +127,7 @@ padding-top:50px;
 		<div class="col-sm-1 col-md-1 col-lg-1"></div>
 		<a href="custmval.jsp"><div class="col-sm-2 col-md-2 col-lg-2">
 			<div class="row" align="center">
-				<img src="images/startat-logo-navbar.png" class="img-circle">
+<div class="bigicon"><i class="fa fa-video-camera fa-5x" aria-hidden="true"></i></div>
 			</div>
 			<div class="row">
 				<h3 align="center">
@@ -139,7 +142,7 @@ padding-top:50px;
 		<div class="col-sm-1 col-md-1 col-lg-1"></div>
 		<a href="growth.jsp"><div class="col-sm-2 col-md-2 col-lg-2">
 			<div class="row" align="center">
-				<img src="images/startat-logo-navbar.png" class="img-circle">
+<div class="bigicon"><i class="fa fa-bar-chart fa-5x" aria-hidden="true"></i></div>
 			</div>
 			<div class="row">
 				<h3 align="center">

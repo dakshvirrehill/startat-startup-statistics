@@ -239,8 +239,8 @@ public class DBOperations {
 	}
 	public static Connections getPossibleConnections(String field_of_interest,String need) {
 		Connections c=new Connections();
-		Vector<Investor> inv=c.getInvestor();
-		Vector<Startup> str=c.getStartup();
+		Vector<Investor> inv=new Vector<Investor>();
+		Vector<Startup> str=new Vector<Startup>();
 		String sql1="SELECT * FROM Investor WHERE Field_Of_Investment='"+field_of_interest+"'";
 		String sql2="SELECT * FROM Company WHERE Company_Domain='"+need+"'";
 		ResultSet rs=selectQuery(sql1);
@@ -418,12 +418,12 @@ public class DBOperations {
 				score.setPopularityScore(rs.getInt(3));
 				score.setCustomerRelationshipScore(rs.getInt(4));
 				score.setCustomerSegmentScore(rs.getInt(5));
-				score.setValuePropositionsScore(rs.getInt(5));
-				score.setComparisionWith(rs.getString(6));
-				score.setPopularity(rs.getString(7));
-				score.setCustomerRelationship(rs.getString(8));
-				score.setCustomerSegment(rs.getString(9));
-				score.setValueProposition(rs.getString(10));
+				score.setValuePropositionsScore(rs.getInt(6));
+				score.setComparisionWith(rs.getString(7));
+				score.setPopularity(rs.getString(8));
+				score.setCustomerRelationship(rs.getString(9));
+				score.setCustomerSegment(rs.getString(10));
+				score.setValueProposition(rs.getString(11));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -443,7 +443,7 @@ public class DBOperations {
 		}
 	}
 	public static boolean addFinancials(Financials fin) {
-		String sql="INSERT INTO Financials VALUES("+fin.getCompanyId()+",'"+fin.getFinancial_Name()+"','"+fin.getFinancial_Type()+"',"+fin.getFinancialAmount()+",'"+fin.getDate()+"',"+fin.getSales()+","+fin.getMonth()+","+fin.getYear()+")";
+		String sql="INSERT INTO Financials VALUES("+fin.getCompanyId()+",'"+fin.getFinancial_Name()+"','"+fin.getFinancial_Type()+"',"+fin.getFinancialAmount()+",'"+fin.getDate()+"',"+fin.getSales()+","+fin.getMonth()+","+fin.getYear()+","+fin.getTotalCost()+","+fin.getTotalRev()+")";
 		if(insertOrUpdate(sql)>0) {
 			return true;
 		}
@@ -465,6 +465,8 @@ public class DBOperations {
 				fin.setSales(rs.getInt(7));
 				fin.setMonth(rs.getInt(8));
 				fin.setYear(rs.getInt(9));
+				fin.setTotalCost(rs.getInt(10));
+				fin.setTotalRev(rs.getInt(11));
 				finance.add(fin);
 			}
 		} catch (SQLException e) {
@@ -473,38 +475,32 @@ public class DBOperations {
 		}
 		return finance;
 	}
-	public static void updateRevenue(int cid, int revenue) {
-		String sql="UPDATE Company SET TotalRevenue="+revenue+" WHERE CompanyId="+cid;
-		int i=insertOrUpdate(sql);
-	}
-	public static void updateCost(int cid, int cost) {
-		String sql="UPDATE Company SET TotalCost="+cost+" WHERE CompanyId="+cid;
-		int i=insertOrUpdate(sql);		
-	}
 	public static int getRevenue(int cid) {
-		String sql="SELECT TotalRevenue FROM Company WHERE CompanyId="+cid;
+		String sql="SELECT TotalRevenue FROM Financials WHERE CompanyId="+cid;
 		ResultSet rs=selectQuery(sql);
+		int rev=0;
 		try {
-			if(rs.next()) {
-				return rs.getInt(1);
+			while(rs.next()) {
+				 rev=rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
+		return rev;
 	}
 	public static int getCost(int cid) {
-		String sql="SELECT TotalCost FROM Company WHERE CompanyId="+cid;
+		String sql="SELECT TotalCost FROM Financials WHERE CompanyId="+cid;
 		ResultSet rs=selectQuery(sql);
+		int cost=0;
 		try {
-			if(rs.next()) {
-				return rs.getInt(1);
+			while(rs.next()) {
+				cost=rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
+		return cost;
 	}
 }
