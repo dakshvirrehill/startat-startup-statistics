@@ -17,7 +17,13 @@ text-shadow:
 	1px 3px 0 #444; 
  font-size:20px;
 }
-
+.empty {
+clear:both;
+padding-bottom:70px;
+}
+#em{
+float:right;
+}
 </style>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -129,7 +135,7 @@ text-shadow:
       </div>
       <div class="modal-footer">
       <center>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="bAutton" class="btn btn-default" data-dismiss="modal">Close</button>
         </center>
       </div>
     </div>
@@ -138,7 +144,20 @@ text-shadow:
 <div class="jumbotron">
   <h1>Break even analysis</h1> 
  </div>
-<div class="row">
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <div class="row">
   <div class="text">
   <div class="col-sm-1"></div>
   <div class="col-sm-2"><b><h3>Serial no</h3></b></div>
@@ -171,10 +190,138 @@ text-shadow:
   <div class="col-sm-1"></div>
 </div>
 </div>
+    </div>
+
+    <div class="item">
+     <div class="row">
+  <div class="text">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2"><b><h3>Serial no</h3></b></div>
+  <div class="col-sm-2"><b><h3>Finance name</h3></b></div>
+  <div class="col-sm-2"><b><h3>Finance type</h3></b></div>
+  <div class="col-sm-2"><b><h3>Financial amount</h3></b></div>
+  <div class="col-sm-2"><b><h3>Date</h3></b></div>
+  <div class="col-sm-1"></div>
+</div>
+</div>
+<div class="row">
+ <div class="text">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2">1</div>
+  <div class="col-sm-2">Iphone</div>
+  <div class="col-sm-2">benefit</div>
+  <div class="col-sm-2">50000</div>
+  <div class="col-sm-2">8/1/2015</div>
+  <div class="col-sm-1"></div>
+</div>
+</div>
+<div class="row">
+  <div class="text">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2">2</div>
+  <div class="col-sm-2">battery</div>
+  <div class="col-sm-2">cost</div>
+  <div class="col-sm-2">8000</div>
+  <div class="col-sm-2">22/10/2015</div>
+  <div class="col-sm-1"></div>
+</div>
+</div>
+    </div>
+
+    <div class="item">
+      <div class="row">
+  <div class="text">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2"><b><h3>Serial no</h3></b></div>
+  <div class="col-sm-2"><b><h3>Finance name</h3></b></div>
+  <div class="col-sm-2"><b><h3>Finance type</h3></b></div>
+  <div class="col-sm-2"><b><h3>Financial amount</h3></b></div>
+  <div class="col-sm-2"><b><h3>Date</h3></b></div>
+  <div class="col-sm-1"></div>
+</div>
+</div>
+<div class="row">
+ <div class="text">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2">1</div>
+  <div class="col-sm-2">Iphone</div>
+  <div class="col-sm-2">benefit</div>
+  <div class="col-sm-2">50000</div>
+  <div class="col-sm-2">8/1/2015</div>
+  <div class="col-sm-1"></div>
+</div>
+</div>
+<div class="row">
+  <div class="text">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2">2</div>
+  <div class="col-sm-2">battery</div>
+  <div class="col-sm-2">cost</div>
+  <div class="col-sm-2">8000</div>
+  <div class="col-sm-2">22/10/2015</div>
+  <div class="col-sm-1"></div>
+</div>
+</div>
+    </div>
+
+    <div class="item">
+      <div class="row">
+  <div class="text">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2"><b><h3>Serial no</h3></b></div>
+  <div class="col-sm-2"><b><h3>Finance name</h3></b></div>
+  <div class="col-sm-2"><b><h3>Finance type</h3></b></div>
+  <div class="col-sm-2"><b><h3>Financial amount</h3></b></div>
+  <div class="col-sm-2"><b><h3>Date</h3></b></div>
+  <div class="col-sm-1"></div>
+</div>
+</div>
+<div class="row">
+ <div class="text">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2">1</div>
+  <div class="col-sm-2">Iphone</div>
+  <div class="col-sm-2">benefit</div>
+  <div class="col-sm-2">50000</div>
+  <div class="col-sm-2">8/1/2015</div>
+  <div class="col-sm-1"></div>
+</div>
+</div>
+<div class="row">
+  <div class="text">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2">2</div>
+  <div class="col-sm-2">battery</div>
+  <div class="col-sm-2">cost</div>
+  <div class="col-sm-2">8000</div>
+  <div class="col-sm-2">22/10/2015</div>
+  <div class="col-sm-1"></div>
+</div>
+</div>
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+
 <br>
 <br>
-<button type="button" class="btn btn-success">Enter more</button>
-<div class="container">
+
+<a href="#form" class="btn btn-success btn-lg" id="em"><span class="fa fa-chevron-down"></span>Enter More</a>
+<div class="row empty"></div>
+     <div class="row empty"></div>
+     <div class="row empty"></div>
+ <div class="row empty"></div>
+<div class="container" id="form">
   
   <form class="form-horizontal" role="form">
     <div class="form-group">
@@ -198,6 +345,7 @@ text-shadow:
   </datalist>
       </div>
     </div>
+    <
     <div class="form-group">
       <label class="control-label col-sm-2" for="famt">Financial amount:</label>
       <div class="col-sm-10">          
@@ -220,8 +368,37 @@ text-shadow:
       </div>
     </div>
   </form>
+ <div class="row empty"></div>
+  <div class="row empty"></div>
+   <div class="row empty"></div>
+    
+     
 </div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>   
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#em').on('click',function(event){
+		// Prevent default anchor click behavior
+	    event.preventDefault();
 
+	    // Store hash
+	    var hash = this.hash;
+
+	    // Using jQuery's animate() method to add smooth page scroll
+	    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+	    $('html, body').animate({
+	      scrollTop: $(hash).offset().top
+	    }, 800, function(){
+	   
+	      // Add hash (#) to URL when done scrolling (default click behavior)
+	      window.location.hash = hash;
+	    });
+	});
+});
+</script>
 
 </body>
 </head>

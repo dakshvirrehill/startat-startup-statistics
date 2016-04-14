@@ -9,20 +9,14 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<title>front1</title>
+  <title>Insert title here</title>
+</head>
 <style>
 .text{
 text-shadow: 
 	2px 4px 0 lightblue,
 	1px 3px 0 #444; 
  font-size:20px;
-}
-.empty {
-clear:both;
-padding-bottom:70px;
-}
-#em{
-float:right;
 }
 </style>
 <body>
@@ -142,25 +136,25 @@ float:right;
   </div>
 </div>
 <div class="jumbotron">
-  <h1>Break even analysis</h1> 
+  <h3>Break even analysis Yearly</h3> 
  </div>
 <ol class="breadcrumb">
+  <li><a href="#">Dashboard</a></li>
   <li><a href="#">Display break even</a></li>
   <li class="active">Yearly</li>
 </ol>
-
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
-  </ol>
-
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-    <div class="item active">
+<div class="container">
+  
+  <ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#tabular">Tabular</a></li>
+    <li><a data-toggle="pill" href="#graphical-sale">Graphical-sale</a></li>
+    <li><a data-toggle="pill" href="#graphical-monetary">Graphical-monetary</a></li>
+    
+  </ul>
+  
+  <div class="tab-content">
+    <div id="tabular" class="tab-pane fade in active">
+      <h3>Tabular</h3>
       <div class="row">
   <div class="text">
   <div class="col-sm-1"></div>
@@ -195,134 +189,21 @@ float:right;
 </div>
 </div>
     </div>
-
-    <div class="item">
-     <div class="row">
-  <div class="text">
-  <div class="col-sm-1"></div>
-  <div class="col-sm-2"><b><h3>Serial no</h3></b></div>
-  <div class="col-sm-2"><b><h3>Finance name</h3></b></div>
-  <div class="col-sm-2"><b><h3>Finance type</h3></b></div>
-  <div class="col-sm-2"><b><h3>Financial amount</h3></b></div>
-  <div class="col-sm-2"><b><h3>Date</h3></b></div>
-  <div class="col-sm-1"></div>
-</div>
-</div>
-<div class="row">
- <div class="text">
-  <div class="col-sm-1"></div>
-  <div class="col-sm-2">1</div>
-  <div class="col-sm-2">Iphone</div>
-  <div class="col-sm-2">benefit</div>
-  <div class="col-sm-2">50000</div>
-  <div class="col-sm-2">8/1/2015</div>
-  <div class="col-sm-1"></div>
-</div>
-</div>
-<div class="row">
-  <div class="text">
-  <div class="col-sm-1"></div>
-  <div class="col-sm-2">2</div>
-  <div class="col-sm-2">battery</div>
-  <div class="col-sm-2">cost</div>
-  <div class="col-sm-2">8000</div>
-  <div class="col-sm-2">22/10/2015</div>
-  <div class="col-sm-1"></div>
-</div>
-</div>
+    <div id="graphical-sale" class="tab-pane fade">
+      <h3>Graphical-sale</h3>
     </div>
-
-    <div class="item">
-      <div class="row">
-  <div class="text">
-  <div class="col-sm-1"></div>
-  <div class="col-sm-2"><b><h3>Serial no</h3></b></div>
-  <div class="col-sm-2"><b><h3>Finance name</h3></b></div>
-  <div class="col-sm-2"><b><h3>Finance type</h3></b></div>
-  <div class="col-sm-2"><b><h3>Financial amount</h3></b></div>
-  <div class="col-sm-2"><b><h3>Date</h3></b></div>
-  <div class="col-sm-1"></div>
-</div>
-</div>
-<div class="row">
- <div class="text">
-  <div class="col-sm-1"></div>
-  <div class="col-sm-2">1</div>
-  <div class="col-sm-2">Iphone</div>
-  <div class="col-sm-2">benefit</div>
-  <div class="col-sm-2">50000</div>
-  <div class="col-sm-2">8/1/2015</div>
-  <div class="col-sm-1"></div>
-</div>
-</div>
-<div class="row">
-  <div class="text">
-  <div class="col-sm-1"></div>
-  <div class="col-sm-2">2</div>
-  <div class="col-sm-2">battery</div>
-  <div class="col-sm-2">cost</div>
-  <div class="col-sm-2">8000</div>
-  <div class="col-sm-2">22/10/2015</div>
-  <div class="col-sm-1"></div>
-</div>
-</div>
+    <div id="graphical-monetary" class="tab-pane fade">
+      <h3>Graphical-monetary</h3>
     </div>
-
-    <div class="item">
-      <div class="row">
-  <div class="text">
-  <div class="col-sm-1"></div>
-  <div class="col-sm-2"><b><h3>Serial no</h3></b></div>
-  <div class="col-sm-2"><b><h3>Finance name</h3></b></div>
-  <div class="col-sm-2"><b><h3>Finance type</h3></b></div>
-  <div class="col-sm-2"><b><h3>Financial amount</h3></b></div>
-  <div class="col-sm-2"><b><h3>Date</h3></b></div>
-  <div class="col-sm-1"></div>
-</div>
-</div>
-<div class="row">
- <div class="text">
-  <div class="col-sm-1"></div>
-  <div class="col-sm-2">1</div>
-  <div class="col-sm-2">Iphone</div>
-  <div class="col-sm-2">benefit</div>
-  <div class="col-sm-2">50000</div>
-  <div class="col-sm-2">8/1/2015</div>
-  <div class="col-sm-1"></div>
-</div>
-</div>
-<div class="row">
-  <div class="text">
-  <div class="col-sm-1"></div>
-  <div class="col-sm-2">2</div>
-  <div class="col-sm-2">battery</div>
-  <div class="col-sm-2">cost</div>
-  <div class="col-sm-2">8000</div>
-  <div class="col-sm-2">22/10/2015</div>
-  <div class="col-sm-1"></div>
-</div>
-</div>
-    </div>
+    
   </div>
-
-  <!-- Left and right controls -->
-  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
 </div>
-   <div class="row empty"></div>
-<div id="em">
-<a href="NewFile.jsp" class="btn btn-danger" role="button">Tab</a>
-  <a href="graph.jsp" class="btn btn-danger" role="button">Graph</a>          
- 
-  </div>
 
 
 </body>
-</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+
+</script>
 </html>

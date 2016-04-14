@@ -304,6 +304,26 @@ z-index:-5;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>   
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#km').on('click',function(event){
+		// Prevent default anchor click behavior
+	    event.preventDefault();
 
+	    // Store hash
+	    var hash = this.hash;
+
+	    // Using jQuery's animate() method to add smooth page scroll
+	    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+	    $('html, body').animate({
+	      scrollTop: $(hash).offset().top
+	    }, 800, function(){
+	   
+	      // Add hash (#) to URL when done scrolling (default click behavior)
+	      window.location.hash = hash;
+	    });
+	});
+});
+</script>
 </body>
 </html>
