@@ -1,7 +1,31 @@
 package model;
 
 public class User {
-String username,email,password,mobno,subscription;
+String username,email,password,mobno,name,profile_pic_path,status,description;
+
+public String getDescription() {
+	return description;
+}
+
+public void setDescription(String description) {
+	this.description = description;
+}
+
+public String getStatus() {
+	return status;
+}
+
+public void setStatus(String status) {
+	this.status = status;
+}
+
+public String getProfile_pic_path() {
+	return profile_pic_path;
+}
+
+public void setProfile_pic_path(String profile_pic_path) {
+	this.profile_pic_path = profile_pic_path;
+}
 
 public String getPassword() {
 	return password;
@@ -31,12 +55,12 @@ public void setMobno(String mobno) {
 	this.mobno = mobno;
 }
 
-public String getSubscription() {
-	return subscription;
+public String getName() {
+	return name;
 }
 
-public void setSubscription(String subscription) {
-	this.subscription = subscription;
+public void setName(String name) {
+	this.name = name;
 }
 
 public void setPassword(String password) {
