@@ -127,7 +127,7 @@ else {
  </form>
  <div class="empty"></div>
  <div class="empty"></div> 
- <img id="growthgraph" src="<%=cid %>_<%=session.getAttribute("username") %>_growth.jpg">
+ <img id="growthgraph" src="useruploads/<%=cid %>_<%=session.getAttribute("username") %>_growth.jpg">
 <%
 }
 %>

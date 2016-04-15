@@ -503,4 +503,11 @@ public class DBOperations {
 		}
 		return cost;
 	}
+	public static boolean addQuery(Query q) {
+		String sql="INSERT INTO Query VALUES('"+q.getName()+"','"+q.getEmail()+"','"+q.getMessage()+"')";
+		if(insertOrUpdate(sql)>0) {
+			return true;
+		}
+		return false;
+	}
 }

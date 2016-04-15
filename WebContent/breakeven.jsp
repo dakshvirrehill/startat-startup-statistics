@@ -206,11 +206,11 @@ in=in+1;
 	</ul>
 	<div id="graphical-saleyr" class="tab-pane fade">
       <h3>Graphical-sale</h3>
-      <img src="">
+      <img src="useruploads/<%=cid %>_<%=session.getAttribute("username") %>_breakevenslyr.jpg">
     </div>
     <div id="graphical-monetaryyr" class="tab-pane fade">
       <h3>Graphical-monetary</h3>
-      <img src="">
+      <img src="useruploads/<%=cid %>_<%=session.getAttribute("username") %>_breakevenyearly.jpg">
     </div>	
 </div>
 <div class="empty"></div>
@@ -222,11 +222,11 @@ in=in+1;
 	</ul>
 	<div id="graphical-salemo" class="tab-pane fade">
       <h3>Graphical-sale</h3>
-      <img src="">
+      <img src="useruploads/<%=cid %>_<%=session.getAttribute("username") %>_breakevenslmo.jpg">
     </div>
     <div id="graphical-monetarymo" class="tab-pane fade">
       <h3>Graphical-monetary</h3>
-      <img src="">
+      <img src="useruploads/<%=cid %>_<%=session.getAttribute("username") %>_breakevenmonthly.jpg">
     </div>	
 </div>
 <div class="empty"></div>
@@ -238,11 +238,11 @@ in=in+1;
 	</ul>
 	<div id="graphical-saleda" class="tab-pane fade">
       <h3>Graphical-sale</h3>
-      <img src="">
+      <img src="useruploads/<%=cid %>_<%=session.getAttribute("username") %>_breakevenslda.jpg">
     </div>
     <div id="graphical-monetaryda" class="tab-pane fade">
       <h3>Graphical-monetary</h3>
-      <img src="">
+      <img src="useruploads/<%=cid %>_<%=session.getAttribute("username") %>_breakevendaily.jpg">
     </div>	
 </div>
 <%
