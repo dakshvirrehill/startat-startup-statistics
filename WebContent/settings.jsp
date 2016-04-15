@@ -16,7 +16,7 @@ if(session.getAttribute("username")==null)
 {
 String message="Kindly login before accessing this page";
 request.setAttribute("msg",message);
-response.sendRedirect("/login.jsp");
+response.sendRedirect("login.jsp");
 }
 %>
 <title>Settings | <%=session.getAttribute("username") %></title>
@@ -35,7 +35,7 @@ padding-top:50px;
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/"><img src="images/startat-logo-navbar.png"></a>
+      <a class="navbar-brand" href="index.jsp"><img src="images/startat-logo-navbar.png"></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="page.jsp?name=about">About</a></li>

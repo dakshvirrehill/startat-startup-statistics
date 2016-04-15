@@ -1,7 +1,39 @@
 package model;
 
 public class Company {
-String logo_path,email,name,field_of_interest,user_id,website,valuation,total_profits,total_expenses,verification,ownership_proof_path,description;
+String logo_path,email,name,field_of_interest,user_id,website,valuation,total_profits,total_expenses,verification,ownership_proof_path,description,vid_path,need,stage_of_development,established;
+public String getNeed() {
+	return need;
+}
+
+public void setNeed(String need) {
+	this.need = need;
+}
+
+public String getStage_of_development() {
+	return stage_of_development;
+}
+
+public void setStage_of_development(String stage_of_development) {
+	this.stage_of_development = stage_of_development;
+}
+
+public String getEstablished() {
+	return established;
+}
+
+public void setEstablished(String established) {
+	this.established = established;
+}
+
+public String getVid_path() {
+	return vid_path;
+}
+
+public void setVid_path(String vid_path) {
+	this.vid_path = vid_path;
+}
+
 public String getDescription() {
 	return description;
 }

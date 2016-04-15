@@ -24,11 +24,6 @@ import model.DBOperations;
 @WebServlet("/Add_Comp")
 public class Add_Comp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private boolean isMultipart;
-	private String filePath;
-	private int maxFileSize = 50 * 1024;
-	private int maxMemSize = 4 * 1024;
-	private File file ;      
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,10 +31,6 @@ public class Add_Comp extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    public void init( ){
-        // Get the file location where it would be stored.
-        filePath = getServletContext().getInitParameter("file-upload"); 
-     }
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -61,45 +52,28 @@ public class Add_Comp extends HttpServlet {
 		if(name.equals("")) {
 			name="Unnamed";
 		}
-		String profile="useruploads/";
-		isMultipart = ServletFileUpload.isMultipartContent(request);
-		DiskFileItemFactory factory = new DiskFileItemFactory();
-	    // maximum size that will be stored in memory
-	    factory.setSizeThreshold(maxMemSize);
-	    // Location to save data that is larger than maxMemSize.
-	    factory.setRepository(new File("F:\\temp"));
-	    // Create a new file upload handler
-	    ServletFileUpload upload = new ServletFileUpload(factory);
-	    // maximum file size to be uploaded.
-	    upload.setSizeMax( maxFileSize );
-	    try{ 
-	    // Parse the request to get file items.
-	    List fileItems = upload.parseRequest(request);
-	    // Process the uploaded file items
-	    Iterator i = fileItems.iterator();
-	    while ( i.hasNext () ) 
-	    {
-	       FileItem fi = (FileItem)i.next();
-	       if ( !fi.isFormField () )	
-	       {
-	          // Get the uploaded file parameters
-	          String fieldName = fi.getFieldName();
-	          String fileName = fi.getName();
-	          String contentType = fi.getContentType();
-	          boolean isInMemory = fi.isInMemory();
-	          long sizeInBytes = fi.getSize();
-	          // Write the file
-	          if( fileName.lastIndexOf("\\") >= 0 ){
-	        	  profile=profile+username+fileName.substring(fileName.lastIndexOf('\\'));
-	             file =new File( filePath +username+"_"+name+fileName.substring(fileName.lastIndexOf("\\"))) ;
-	          }else{
-	        	  profile=profile+username+fileName.substring(fileName.lastIndexOf('\\')+1);
-	             file =new File( filePath +username+"_"+name+fileName.substring(fileName.lastIndexOf("\\")+1)) ;
-	          }
-	          fi.write( file ) ;
-	       }
-	    }
-	    if(DBOperations.addCompany(username,name,company_domain,email,website,stage_of_development,established,profile,description))
+		String profile="";
+		if (!ServletFileUpload.isMultipartContent(request)) {
+            throw new IllegalArgumentException("Request is not multipart, please 'multipart/form-data' enctype for your form.");
+        }
+
+        ServletFileUpload uploadHandler = new ServletFileUpload(new DiskFileItemFactory());
+        try {
+            List<FileItem> items = uploadHandler.parseRequest(request);
+            for (FileItem item : items) {
+                if (!item.isFormField()) {
+                        File file = new File(request.getServletContext().getRealPath("/")+"useruploads/", item.getName());
+                        profile=request.getServletContext().getRealPath("/")+"useruploads/"+username+"_"+name+"_"+item.getName();
+                        item.write(file);
+                }
+            }
+        } catch (FileUploadException e) {
+                throw new RuntimeException(e);
+        } catch (Exception e) {
+                throw new RuntimeException(e);
+        }
+	    
+		if(DBOperations.addCompany(username,name,company_domain,email,website,stage_of_development,established,profile,description))
 	    {
 	    	String message="Changes saved successfully";
 	    	request.setAttribute("msg1", message);
@@ -111,8 +85,5 @@ public class Add_Comp extends HttpServlet {
 	    	request.setAttribute("msg", message);
 	    	getServletContext().getRequestDispatcher("/addcomp.jsp").include(request, response);
 	    }
-   }catch(Exception e) {
-	   	e.printStackTrace();
-   }
 }
 }

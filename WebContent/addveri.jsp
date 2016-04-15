@@ -18,14 +18,14 @@ if(session.getAttribute("username")==null)
 {
 String message="Kindly login before accessing this page";
 request.setAttribute("msg",message);
-response.sendRedirect("/login.jsp");
+response.sendRedirect("login.jsp");
 }
 if(request.getParameter("name")==null){
-	response.sendRedirect("/company.jsp");
+	response.sendRedirect("company.jsp");
 }
 Company c=DBOperations.getCompanyDetails(Integer.parseInt(request.getParameter("name")));
-if(c.getVerification()=="yes"){
-	response.sendRedirect("/company.jsp");
+if(c.getVerification().equals("Yes")){
+	response.sendRedirect("company.jsp");
 }
 %>
 <title><%=session.getAttribute("username") %> | Company | <%=request.getParameter("name") %></title>
@@ -44,7 +44,7 @@ padding-top:50px;
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/"><img src="images/startat-logo-navbar.png"></a>
+      <a class="navbar-brand" href="index.jsp"><img src="images/startat-logo-navbar.png"></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="page.jsp?name=about">About</a></li>
@@ -71,7 +71,7 @@ padding-top:50px;
 	<form role="form" class="form-horizontal" method="post" action="Verification" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="verification" class="control-label">Document:</label>
-			<input type="file" class="form-control" id="verification" name="verification" placeholder="Upload Verification Document">
+			<input type="file" class="form-control" id="verification" name="verification" accept="application/pdf" placeholder="Upload Verification Document">
 		</div>
 		<div class="form-group">
 			<input type="text" name="cid" value="<%=c.getCId()%>" hidden>

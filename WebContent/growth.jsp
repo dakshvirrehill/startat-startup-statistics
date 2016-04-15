@@ -18,10 +18,10 @@ if(session.getAttribute("username")==null)
 {
 String message="Kindly login before accessing this page";
 request.setAttribute("msg",message);
-response.sendRedirect("/login.jsp");
+response.sendRedirect("login.jsp");
 }
 %>
-<title>GrowthP | <%=session.getAttribute("username") %></title>
+<title>Growth Prediction | <%=session.getAttribute("username") %></title>
 
 <style>
 .empty {
@@ -35,7 +35,34 @@ padding-top:50px;
 </style>
 </head>
 <body>
+<nav class="navbar navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.jsp"><img src="images/startat-logo-navbar.png"></a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="page.jsp?name=about">About</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="addcomp.jsp">Add a Company</a>
+          <li><a href="profile.jsp">Profile</a></li>
+          <li><a href="settings.jsp">Settings</a></li>
+          <li><a href="logout">Logout</a></li> 
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
 <div class="empty top"></div>
+<div class="container">
+	<ol class="breadcrumb">
+		<li><a href="dashboard.jsp">Dashboard</a></li>
+		<li class="active">Growth Prediction</li>
+	</ol>
+</div>
+<div class="empty"></div>
 <div class="container-fluid">
 <%
 if(request.getParameter("name")==null)
@@ -69,25 +96,38 @@ if(request.getParameter("name")==null)
 			<div class="row">
 				<div class="col-sm-2 col-md-2 col-lg-2"><%=j %></div>
 				<div class="col-sm-1 col-md-1 col-lg-1"></div>
-				<%if(c.getVerification()=="yes") { %><a href="growth.jsp?name=<%=c.getCId() %>"><div class="col-sm-2 col-md-2 col-lg-2"><%=c.getName() %></div></a><%} else { %><div class="col-sm-2 col-md-2 col-lg-2"><%=c.getName() %></div><%} %>
+				<%if(c.getVerification().equals("Yes")) { %><a href="growth.jsp?name=<%=c.getCId() %>"><div class="col-sm-2 col-md-2 col-lg-2"><%=c.getName() %></div></a><%} else { %><div class="col-sm-2 col-md-2 col-lg-2"><%=c.getName() %></div><%} %>
 				<div class="col-sm-1 col-md-1 col-lg-1"></div>
 				<div class="col-sm-2 col-md-2 col-lg-2"><%=c.getField_of_interest() %></div>
 				<div class="col-sm-1 col-md-1 col-lg-1"></div>
-				<div class="col-sm-3 col-md-3 col-lg-3"><%=c.getVerification() %><%if(c.getVerification()=="no"){%><a class="btn btn-primary" href="addveri.jsp?name=<%=c.getCId()%>">Get Verified</a><%} %></div>
+				<div class="col-sm-3 col-md-3 col-lg-3"><%=c.getVerification() %><%if(c.getVerification().equals("No")){%><a class="btn btn-primary" href="addveri.jsp?name=<%=c.getCId()%>">Get Verified</a><%} %></div>
 			</div>
 			<%	
 			}
 		}
 }
 else {
-	Company c=DBOperations.getCompanyDetails(Integer.parseInt(request.getParameter("name")));
+	String cid=request.getParameter("name");
+	Company c=DBOperations.getCompanyDetails(Integer.parseInt(cid));
 %>
 <div class="jumbotron">
  <div align="right"><img src="<%=c.getLogo_path()%>"></div><h1><%=c.getName() %></h1><h3><a href="<%=c.getWebsite() %>"><%=c.getWebsite()%></a></h3><h3><a href="mailto:<%=c.getEmail() %>"><%=c.getEmail()%></a></h3>
 <h2 align="center">Growth Prediction</h2> 
  </div>
  <div class="empty"></div>
- 
+ <form action="GrowthPrediction" role="form" class="form-horizontal" method="post">
+ 	<div class="form-group">
+ 		<label for="years" class="control-label">No. of Years:</label>
+ 		<input type="text" class="form-control" id="years" name="years" placeholder="Enter the number of years you want the prediction of including current year">
+ 	</div>
+ 	<div class="form-group">
+ 	<input type="text" name="cid" value="<%=cid %>" hidden>
+ 		<button type="submit" class="btn btn-primary">Submit</button>
+ 	</div>
+ </form>
+ <div class="empty"></div>
+ <div class="empty"></div> 
+ <img id="growthgraph" src="useruploads/<%=cid %>_<%=session.getAttribute("username") %>_growth.jpg">
 <%
 }
 %>

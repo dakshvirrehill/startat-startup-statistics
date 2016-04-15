@@ -19,7 +19,7 @@ if(session.getAttribute("username")==null)
 {
 String message="Kindly login before accessing this page";
 request.setAttribute("msg",message);
-response.sendRedirect("/login.jsp");
+response.sendRedirect("login.jsp");
 }
 %>
 <title>Profile | <%=session.getAttribute("username") %></title>
@@ -47,7 +47,7 @@ opacity:0;
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/"><img src="images/startat-logo-navbar.png"></a>
+      <a class="navbar-brand" href="index.jsp"><img src="images/startat-logo-navbar.png"></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="page.jsp?name=about">About</a></li>
@@ -108,13 +108,12 @@ opacity:0;
       	<div class="col-sm-4 col-md-4 col-lg-4">
       		<div id="profile-preview"></div>
       		<label for="profile-picture-upload" class="btn btn-primary" id="profile-picture">Upload Profile Picture</label>
-			<input type="file" class="form-control" id="profile-picture-upload" name="profile-picture" required>
+			<input type="file" class="form-control" id="profile-picture-upload" name="profile-picture" accept="image/*" required>
       		<h3><small>Kindly upload an image of size 800x600 or of the same ratio for best results</small></h3>
       	</div>
       	<div class="col-sm-4 col-md-4 col-lg-4"></div>
       	<div class="empty"></div>
     </div>
-  </div>
   <div class="item form-group">
     	<div class="empty"></div>
     	<div class="col-sm-4 col-md-4 col-lg-4"></div>
@@ -125,10 +124,10 @@ opacity:0;
     	<div class="col-sm-4 col-md-4 col-lg-4"></div>
     	<div class="empty"></div>
     </div>
-  <a class="left carousel-control" href="#profile-detail-form" role="button" data-slide="prev">
+  <a id="abc" class="left carousel-control" href="#profile-detail-form" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left"></span>
   </a>
-  <a class="right carousel-control" href="#profile-detail-form" role="button" data-slide="next">
+  <a id="abcr" class="right carousel-control" href="#profile-detail-form" role="button" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right"></span>
   </a>
 </div>
@@ -187,6 +186,9 @@ opacity:0;
 <%
 	}
 %>
+<form role="form" class="form-horizontal" action="ChangeStatus" method="post">
+	<button type="submit" class="btn btn-primary" id="changeStatus">Profile Settings</button>
+</form>
 <div class="alert alert-danger">${msg2}</div>
 <form role="form" class="form-horizontal" action="StatusUpdate" method="post">
 	<div class="form-group">
@@ -228,6 +230,15 @@ $(document).ready(function() {
 	    label_default: "Upload Profile Picture", 
 	    label_selected: "Change Profile Picture",
 	    no_label: false 
+	  });
+	  $(document).keypress(function (e) {
+		  var key=e.which;
+		  if(key==37) {
+			  ('#abc').click();
+		  }
+		  else if(key==39) {
+			  $('#abcr').click();
+		  }
 	  });
 	});
 </script>

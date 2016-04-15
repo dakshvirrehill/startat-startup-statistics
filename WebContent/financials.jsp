@@ -4,6 +4,7 @@
 <%@ page import="model.DBOperations" %>
 <%@ page import="java.util.Vector" %>
 <%@ page import="java.util.Iterator" %>
+<%@ page import="model.Financials" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,19 +21,9 @@ String message="Kindly login before accessing this page";
 request.setAttribute("msg",message);
 response.sendRedirect("login.jsp");
 }
-if(request.getParameter("name")==null)
-{
 %>
-<title>Companies | <%=session.getAttribute("username") %></title>
-<% 
-}
-else
-{
-%>
-<title><%=session.getAttribute("username") %> | Company | <%=request.getParameter("name") %></title>
-<%
-}
-%>
+<title>Financials | <%=session.getAttribute("username") %></title>
+
 <style>
 .empty {
 clear:both;
@@ -41,6 +32,12 @@ padding-bottom:70px;
 .top {
 clear:both;
 padding-top:50px;
+}
+.text{
+text-shadow: 
+	2px 4px 0 lightblue,
+	1px 3px 0 #444; 
+ font-size:20px;
 }
 </style>
 </head>
@@ -66,6 +63,13 @@ padding-top:50px;
   </div>
 </nav>
 <div class="empty top"></div>
+<div class="container">
+	<ol class="breadcrumb">
+		<li><a href="dashboard.jsp">Dashboard</a></li>
+		<li class="active">Add Financials</li>
+	</ol>
+</div>
+<div class="empty"></div>
 <div class="container-fluid">
 <%
 if(request.getParameter("name")==null)
@@ -99,30 +103,58 @@ if(request.getParameter("name")==null)
 			<div class="row">
 				<div class="col-sm-2 col-md-2 col-lg-2"><%=j %></div>
 				<div class="col-sm-1 col-md-1 col-lg-1"></div>
-				<a href="company.jsp?name=<%=c.getCId() %>"><div class="col-sm-2 col-md-2 col-lg-2"><%=c.getName() %></div></a>
+				<%if(c.getVerification().equals("Yes")) { %><a href="financials.jsp?name=<%=c.getCId() %>"><div class="col-sm-2 col-md-2 col-lg-2"><%=c.getName() %></div></a><%} else { %><div class="col-sm-2 col-md-2 col-lg-2"><%=c.getName() %></div><%} %>
 				<div class="col-sm-1 col-md-1 col-lg-1"></div>
 				<div class="col-sm-2 col-md-2 col-lg-2"><%=c.getField_of_interest() %></div>
 				<div class="col-sm-1 col-md-1 col-lg-1"></div>
-				<div class="col-sm-3 col-md-3 col-lg-3"><%=c.getVerification() %><%if(c.getVerification()=="No"){%><a class="btn btn-primary" href="addveri.jsp?name=<%=c.getCId()%>">Get Verified</a><%} %></div>
+				<div class="col-sm-3 col-md-3 col-lg-3"><%=c.getVerification() %><%if(c.getVerification().equals("No")){%><a class="btn btn-primary" href="addveri.jsp?name=<%=c.getCId()%>">Get Verified</a><%} %></div>
 			</div>
 			<%	
 			}
 		}
 }
 else {
-	Company c=DBOperations.getCompanyDetails(Integer.parseInt(request.getParameter("name")));
+	int cid=Integer.parseInt(request.getParameter("name"));
+	Company c=DBOperations.getCompanyDetails(cid);
 %>
 <div class="jumbotron">
  <div align="right"><img src="<%=c.getLogo_path()%>"></div><h1><%=c.getName() %></h1><h3><a href="<%=c.getWebsite() %>"><%=c.getWebsite()%></a></h3><h3><a href="mailto:<%=c.getEmail() %>"><%=c.getEmail()%></a></h3>
+<h2 align="center">Add Financials</h2> 
  </div>
  <div class="empty"></div>
- <div class="col-sm-8 col-md-8 col-lg-8"><p>
- <%=c.getDescription() %>
- </p>
- </div>
- <div class="col-sm-4 col-md-4 col-lg-4">
- <div class="row"><h3>Valuation:<small><% if(c.getValuation()==null){%>Not Set<% }else{ %><%=c.getValuation() %><%} %></small></h3></div>
- <%if(c.getVerification()=="No") { %><div class="row">c.getVerification() <a class="btn btn-primary" href="addveri.jsp?name=<%=c.getCId()%>">Get Verified</a></div><% } %>
+ <div class="container-fluid">
+ 	<form action="Add_Financials" role="form" class="form-horizontal" method="post">
+ 		<div class="form-group">
+ 			<label for="type" class="control-label">Financial Type:</label>
+ 			<select id="type" name="type" class="form-control">
+ 				<option value="">Type of the Financial</option>
+ 				<option value="cost">Cost</option>
+ 				<option value="revenue">Revenue</option>
+ 			</select>
+ 		</div>
+ 		<div class="form-group">
+ 			<label for="name" class="control-label">Financial Name:</label>
+ 			<input id="name" type="text" class="form-control" name="name" placeholder="Enter identifier name for the financial">
+ 		</div>
+ 		<div class="form-group">
+ 			<label for="amount" class="control-label">Financial Amount:</label>
+ 			<input id="amount" type="text" class="form-control" name="amount" placeholder="Enter the amount of the financial in rupees">
+ 		</div>
+ 		<div class="form-group">
+ 			<label for="date" class="control-label">Financial Date:</label>
+ 			<input id="date" class="form-control" type="text" name="date" placeholder="Enter the date in the format DD/MM/YYYY">
+ 		</div>
+ 		<div class="form-group">
+ 			<label for="sales" class="control-label">Sales:</label>
+ 			<input id="sales" class="form-control" type="text" name="sales" placeholder="Enter sale value if revenue type financial, type 0 if cost type financial">
+ 		</div>
+ 		<div class="form-group">
+ 			<input type="text" name="cid" value="<%=cid %>" hidden>
+ 			<button type="submit" class="btn btn-primary">Add Financial</button>
+ 		</div>
+ 	</form>
+ 	<div class="empty"></div>
+ 	<div class="empty"></div>
  </div>
 <%
 }
